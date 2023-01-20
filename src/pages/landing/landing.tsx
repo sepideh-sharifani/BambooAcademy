@@ -1,3 +1,11 @@
+import { GeneralInfo, LandingCourses, RoadMap, News, Suggestions } from "./components";
+
 export default function Landing() {
-    return <h1>this landing page</h1>
+    return <div className={`w-full`} >
+        <GeneralInfo></GeneralInfo>
+        <LandingCourses></LandingCourses>
+        <RoadMap></RoadMap>
+        <News></News>
+        <Suggestions></Suggestions>
+    </div >
 }
