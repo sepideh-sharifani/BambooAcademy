@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   mode: "jit",
-  purge: ["./src/**/*.{js,jsx,ts,tsx}"],
+  purge: ["./src/**/*.{js,jsx,ts,tsx}", ],
   plugins: [],
   theme: {
     extend:
@@ -9,9 +9,10 @@ module.exports = {
       fontFamily: {
         "Lalezar": ["Lalezar", "sans-serif"]
       },
-    },
-    backgroundImage: {
-      'general-info': "url('/img/hero-pattern.svg')",
+      backgroundImage: {
+        'generalInfo': "url('./assets/neonbrand-zFSo6bnZJTw-unsplash.png')",
+        'js': "url('./assets/480px-Unofficial_JavaScript_logo_2.svg.png')",
+      },
     },
     gridTemplateRows: {
       '20': 'repeat(20, minmax(0, 1fr))',
