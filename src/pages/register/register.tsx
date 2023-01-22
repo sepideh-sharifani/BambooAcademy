@@ -1,3 +1,7 @@
+import { AuthContainer } from "./component/AuthContainer";
+
 export default function Register() {
-    return <h1>this is register page!</h1>
+    return (
+        <AuthContainer />
+    )
 }
