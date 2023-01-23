@@ -12,6 +12,18 @@ module.exports = {
       backgroundImage: {
         'generalInfo': "url('./assets/neonbrand-zFSo6bnZJTw-unsplash.png')",
         'js': "url('./assets/480px-Unofficial_JavaScript_logo_2.svg.png')",
+        'Csharp': "url('./assets/c--4.png')",
+        'bootstrap': "url('./assets/bootstrap-logo-vector.png')",
+        'java': "url('./assets/logo-java-text-color.png')",
+        'mentoring': "url('./assets/business-people-with-finance-chart.png')",
+        'license': "url('./assets/young-handsome-curly-student-man-with-notebooks-isolated-white-wall.png')",
+        'construction': "url('./assets/cheerful-mood-group-people-business-conference-modern-classroom-daytime.png')",
+        'news': "url('./assets/scott-graham-5fNmWej4tAA-unsplash.png')",
+        'suggestions': "url('./assets/thought-catalog-505eectW54k-unsplash.png')",
+        'landingHeader': "url('./assets/brooke-cagle-g1Kr4Ozfoac-unsplash.png')",
+        'coursesHeader': "url('./assets/thought-catalog-505eectW54k-unsplash.png')",
+        'detailHeader': "url('./assets/thought-catalog-505eectW54k-unsplash.png')",
+        'bamboIcon': "url('./assets/bamboo c).png')",
       },
     },
     gridTemplateRows: {

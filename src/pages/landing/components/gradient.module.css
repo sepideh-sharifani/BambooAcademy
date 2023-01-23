@@ -3,24 +3,9 @@
   background: linear-gradient(
     90deg,
     rgba(0, 68, 88, 1) 0%,
+    rgba(9, 178, 139, 1) 35%,
     rgba(9, 178, 139, 1) 100%
   );
   display: flex;
-  flex-grow:1;
-    position: relative;
-    width: 60%;
-    align-self: flex-start
-}
-
-.gradient:after {
-    content: '';
-    border-bottom: 22.5rem solid transparent;
-    /* border-left: 22.5rem solid #09b28b; */
-    border-top: 22.5rem solid #09b28b;
-    border-right: 12.5rem solid transparent;
-    position: absolute;
-    left: 100%;
-    top: 0;
-    width:0;
-    height: 0;
+  flex-grow: 1;
 }

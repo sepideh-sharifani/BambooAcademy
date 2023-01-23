@@ -1,17 +1,16 @@
-import { convertToRem } from "../../../helpers";
 
+// after:content-[''] after:absolute after:w-0 after:h-0 after:top-0 after:left-full
+// after:border-t-[#088568] after:border-t-[23.4375rem]
+// after:border-l-[#088568] after:border-l-[5rem]
+// after:border-r-transparent after:border-r-[5rem]
+// after:border-b-transparent after:border-b-[23.4375rem]`}
 export default function Suggestions() {
   return (
-    <div className={`w-full  h-[${convertToRem(750)}] flex flex-row `}>
+    <div className={`w-full  h-[70vh] flex flex-row bg-[#088568]`}>
       <div
-        className={`h-full bg-[#088568] relative grow flex flex-col items-center justify-center w-1/2
-        after:content-[''] after:absolute after:w-0 after:h-0 after:top-0 after:left-full
-        after:border-t-[#088568] after:border-t-[23.4375rem]
-        after:border-l-[#088568] after:border-l-[5rem]
-        after:border-r-transparent after:border-r-[5rem]
-        after:border-b-transparent after:border-b-[23.4375rem]`}
+        className={`h-full  relative grow flex flex-col items-center justify-center w-1/2 max-lg:w-full`}
       >
-        <div className="flex flex-col items-center w-3/5 h-full justify-evenly">
+        <div className="flex flex-col items-center w-3/5 h-full max-lg:w-4/5 justify-evenly">
           <h2 className={`text-3xl text-white self-end`}>پیشنهاد و انتقاد</h2>
           <input
             type="text"
@@ -28,7 +27,7 @@ export default function Suggestions() {
           </button>
         </div>
       </div>
-      <div className={`bg-blue-400 grow w-1/2`}></div>
+      <div className={` bg-suggestions grow w-1/2 max-lg:hidden`}></div>
     </div>
   );
 }
