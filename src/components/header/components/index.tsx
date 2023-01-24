@@ -1,3 +1,4 @@
 import NavBar from "./nav-bar";
-
-export {NavBar};
+import HeaderContentLandingRoute from "./header-content-landing-route";
+import HeaderContentDetailsRoute from "./header-content-detail-route";
+export {NavBar, HeaderContentLandingRoute, HeaderContentDetailsRoute};

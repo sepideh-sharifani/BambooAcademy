@@ -21,9 +21,10 @@ module.exports = {
         'news': "url('./assets/scott-graham-5fNmWej4tAA-unsplash.png')",
         'suggestions': "url('./assets/thought-catalog-505eectW54k-unsplash.png')",
         'landingHeader': "url('./assets/brooke-cagle-g1Kr4Ozfoac-unsplash.png')",
-        'coursesHeader': "url('./assets/thought-catalog-505eectW54k-unsplash.png')",
-        'detailHeader': "url('./assets/thought-catalog-505eectW54k-unsplash.png')",
+        'coursesHeader': "url('./assets/Group 87.png')",
+        'detailsHeader': "url('./assets/neonbrand-1-aA2Fadydc-unsplash.png')",
         'bamboIcon': "url('./assets/bamboo c).png')",
+        'jsMark': "url('./assets/jsMark.png')",
       },
     },
     gridTemplateRows: {

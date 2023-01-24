@@ -1,3 +1,5 @@
+import Header from "../../components/header"
+
 export default function CourseDetails(){
-    return <h1>this course details</h1>
+    return <Header hideSearchBar={true}/>
 }

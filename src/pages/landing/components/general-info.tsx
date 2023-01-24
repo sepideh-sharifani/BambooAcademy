@@ -21,8 +21,7 @@ export default function GeneralInfo() {
   return (
     <div
       className={`w-full bg-generalInfo h-[100vh] bg-no-repeat bg-fixed bg-cover bg-center 
-       flex flex-row items-end border-2 border-white
-       max-md:flex-col max-md:items-stretch `}
+       flex flex-row items-end max-md:flex-col max-md:items-stretch `}
     >
       <InfoBox>
         <FaDesktop color={"white"} fontSize={"3rem"} />
