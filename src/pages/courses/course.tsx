@@ -1,3 +1,4 @@
+import Header from "../../components/header"
 export default function Courses () {
-    return <h1>this courses page</h1>
+    return <Header></Header>
 }

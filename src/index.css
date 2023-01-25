@@ -2,6 +2,5 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Lalezar&family=Oxygen+Mono&display=swap')
-
-
+@import url('https://fonts.googleapis.com/css2?family=Lalezar&family=Oxygen+Mono&display=swap');
+/* @import url('./src/pages/landing/assets/neonbrand-zFSo6bnZJTw-unsplash.png') */
