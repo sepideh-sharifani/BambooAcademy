@@ -5,7 +5,7 @@ export default function HeaderContentLandingRoute() {
 
   return (
     <div
-      className="w-full bg-landingHeader h-[calc(100vh-3rem)] flex flex-col justify-center p-[5%] opacity-50"
+      className="w-full bg-landingHeader h-[calc(100vh)] flex flex-col justify-center p-[5%] opacity-50"
       dir="rtl"
     >
       <h2 className={`text-white text-5xl`}>

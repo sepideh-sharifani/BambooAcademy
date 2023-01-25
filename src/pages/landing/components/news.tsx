@@ -3,7 +3,7 @@ import { IoChevronForward } from "react-icons/io5";
 
 export default function News() {
   return (
-    <div
+    <section
       className={`w-full  h-[100vh] flex flex-row max-lg:flex-col max-lg:h-auto`}
     >
       <div
@@ -34,7 +34,7 @@ export default function News() {
       <div
         className={`relative w-[37%] h-[67vh] my-8 max-lg:w-[90%] max-lg:mx-auto `}
       >
-        <div
+        <article
           className={`absolute top-0 left-0  border-2 border-gray w-full h-full  max-w-[48.625rem] max-h-[45.3125rem] 
           flex flex-col justify-center p-4`}
           dir="rtl"
@@ -52,8 +52,8 @@ export default function News() {
           >
             مشاهده‌ مقالات
           </button>
-        </div>
+        </article>
       </div>
-    </div>
+    </section>
   );
 }

@@ -6,7 +6,7 @@
 // after:border-b-transparent after:border-b-[23.4375rem]`}
 export default function Suggestions() {
   return (
-    <div className={`w-full  h-[70vh] flex flex-row bg-[#088568]`}>
+    <section className={`w-full  h-[70vh] flex flex-row bg-[#088568]`}>
       <div
         className={`h-full  relative grow flex flex-col items-center justify-center w-1/2 max-lg:w-full`}
       >
@@ -28,6 +28,6 @@ export default function Suggestions() {
         </div>
       </div>
       <div className={` bg-suggestions grow w-1/2 max-lg:hidden`}></div>
-    </div>
+    </section>
   );
 }

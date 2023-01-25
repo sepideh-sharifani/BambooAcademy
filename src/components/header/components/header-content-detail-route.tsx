@@ -7,8 +7,8 @@ interface InfoBoxProps {
 function InfoBox({ children }: InfoBoxProps) {
   return (
     <div
-      className={`w-1/3 bg-black opacity-40 h-[33vh] 
-         m-[1px] text-black text-4xl flex flex-col justify-evenly items-center max-md:w-full `}
+      className={`w-1/3 bg-black opacity-40 h-[33vh] max-md:h-[11vh]
+         m-[1px] text-black text-4xl flex flex-col max-md:flex-row-reverse justify-evenly items-center max-md:w-full `}
     >
       {children}
     </div>
@@ -17,19 +17,23 @@ function InfoBox({ children }: InfoBoxProps) {
 
 interface HeaderContentDetailsRouteProps {
   mentorName?: string;
-  altname?: string;
-  capacity?: number;
+  title?: string;
+  capacity?: string;
   studentsNumber?: number;
-  logo?: string;
+  // logo?: string;
   imageSrc?: string;
+  endDate?: string;
+  startDate?: string;
 }
 
 export default function HeaderContentDetailsRoute({
   mentorName = "دکتر بحرالعلومی",
-  altname = "دوره جاوااسکریپت",
-  capacity = 59,
+  title = "دوره جاوااسکریپت",
+  capacity = "59",
   studentsNumber = 53,
   imageSrc = "",
+  startDate = '1400/1/1',
+  endDate= '1400/1/1'
 }: HeaderContentDetailsRouteProps) {
   return (
     <div
@@ -41,14 +45,14 @@ export default function HeaderContentDetailsRoute({
       >
         <div className={`h-[4rem] bg-blue-400`}></div>
         <img
-          src={"./../../../assets/jsMark"}
-          className={"bg-red-400 h-[14.3rem] w-[14.3rem]"}
+          src={require("./../../../assets/jsMark.png")}
+          className={" h-[14.3rem] w-[14.3rem]"}
           alt="logo"
           width={"14rem"}
           height={"14rem"}
         />
         {/* <div className={`bg-jsMark self-stretch h-[14.3rem] bg-contain bg-center m bg-no-repeat `}></div> */}
-        <h1 className={`text-white text-4xl `}>{altname}</h1>
+        <h1 className={`text-white text-4xl `}>{title}</h1>
         <div className="flex gap-8">
           <p className="text-2xl text-white ">{`ظرفیت ${capacity} نفر`}</p>
           <p className="text-2xl text-white ">{`دانشجو ${studentsNumber} نفر`}</p>
@@ -61,10 +65,12 @@ export default function HeaderContentDetailsRoute({
         </div>
       </div>
       <div
-        className={`w-full flex flex-row items-end max-md:flex-col max-md:items-stretch `}
+        className={`w-full flex flex-row items-end max-md:flex-col max-md:items-stretch  `}
       >
         <InfoBox>
-          <FaThumbsUp color={"white"} fontSize={"3rem"} />
+          <div className="max-md:hidden">
+            <FaThumbsUp color={"white"} fontSize={"3rem"} />
+          </div>
           <h3 className="text-2xl text-white opacity-100 " dir="rtl">
             {"رتبه:"}
           </h3>
@@ -76,20 +82,24 @@ export default function HeaderContentDetailsRoute({
           </div>
         </InfoBox>
         <InfoBox>
-          <FaCalendar color={"white"} fontSize={"3rem"} />
-          <h3 className="text-2xl text-white opacity-100 " dir="rtl">
-            {"تاریخ شروع : 1400/1/1"}
+          <div className="max-md:hidden">
+            <FaCalendar color={"white"} fontSize={"3rem"} />
+          </div>
+          <h3 className="px-3 text-2xl text-center text-white opacity-100 shrink" dir="rtl">
+            {`تاریخ شروع : ${startDate}`}
           </h3>
-          <h3 className="text-2xl text-white opacity-100 " dir="rtl">
-            {"تاریخ پایان : 1400/1/1"}
+          <h3 className="self-center text-2xl text-center text-white opacity-100 shrink" dir="rtl">
+            {`تاریخ پایان : ${endDate}`}
           </h3>
         </InfoBox>
         <InfoBox>
-          <FaUserTie color={"white"} fontSize={"3rem"} />
-          <h3 className="text-3xl text-white opacity-100 " dir="rtl">
+          <div className="max-md:hidden">
+            <FaUserTie color={"white"} fontSize={"3rem"} />
+          </div>
+          <h3 className="text-2xl text-white opacity-100 " dir="rtl">
             {"مدرس:"}
           </h3>
-          <p className="mx-4 overflow-hidden text-xl text-center text-white opacity-100 text-ellipsis max-h-1/3">
+          <p className="mx-4 overflow-hidden text-2xl text-center text-white opacity-100 text-ellipsis max-h-1/3">
             {mentorName}
           </p>
         </InfoBox>

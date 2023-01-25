@@ -1,5 +1,7 @@
 // import { convertToRem } from "../../../helpers";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import json from "./../../../data/data.json";
 
 interface BoxProps {
   // children: React.ReactNode;
@@ -7,9 +9,11 @@ interface BoxProps {
   logo: string;
   position: string;
   needToContain: boolean;
+  onClick: (event: any)=> void;
 }
 
-function Box({ buttonText, logo, position, needToContain }: BoxProps) {
+
+function Box({ buttonText, logo, position, needToContain , onClick}: BoxProps) {
   return (
     <div
       className={`bg-inherit flex flex-col h-full justify-around items-center`}
@@ -23,18 +27,23 @@ function Box({ buttonText, logo, position, needToContain }: BoxProps) {
           } `}
         ></div>
       </div>
-      <button className={`px-2 py-4 bg-white m-4`}>{`${buttonText}`}</button>
+      <button className={`px-2 py-4 bg-white m-4`} onClick={onClick}>{`${buttonText}`}</button>
     </div>
   );
 }
 
 export default function LandingCourses() {
+  const navigate = useNavigate()
+  console.log('json' , json)
+  // const navigationBtnHandler = (event, params) => {
+  //   navigate(params)
+  // }
   return (
-    <div
+    <section
       className={`w-full  bg-white h-[100vh] flex flex-row max-lg:flex-col `}
     >
       <div className={`relative  h-full w-2/5 max-lg:h-[40%]  max-lg:w-full`}>
-        <div
+        <article
           className={`absolute top-0 left-0 border-2 border-gray w-full h-[65vh] max-lg:h-[90%] flex flex-col justify-center p-4 `}
           dir="rtl"
         >
@@ -48,10 +57,13 @@ export default function LandingCourses() {
           </p>
           <button
             className={`absolute bg-slate-800 text-white p-3 right-3/4 bottom-0 origin-center translate-y-1/2 translate-x-1/2`}
+            onClick={() => {
+              navigate('./../courses')
+            }}
           >
             مشاهده‌ دوره‌ها
           </button>
-        </div>
+        </article>
       </div>
       <div
         className={`grid gap-2 grid-rows-20 grid-cols-20  w-3/5 grow relative max-lg:w-full`}
@@ -62,6 +74,9 @@ export default function LandingCourses() {
             logo="bg-js"
             position="bg-top"
             needToContain={true}
+            onClick={() => {
+              navigate("./../course-details", {state : json[0]} )
+            }}
           ></Box>
         </div>
         <div className="z-10 col-start-10 row-start-4 col-end-20 bg-[#6A1577] row-end-11">
@@ -70,6 +85,9 @@ export default function LandingCourses() {
             logo="bg-Csharp"
             position="bg-center"
             needToContain={false}
+            onClick={() => {
+              navigate("./../course-details", {state : json[1]} )
+            }}
           ></Box>
         </div>
         <div className="z-10 col-start-3 col-end-9 bg-[#CAB2EF]  row-start-13 row-end-20">
@@ -78,6 +96,9 @@ export default function LandingCourses() {
             logo="bg-bootstrap"
             position="bg-center"
             needToContain={true}
+            onClick={() => {
+              navigate("./../course-details", {state : json[4]})
+            }}
           ></Box>
         </div>
         <div className="z-10 col-start-10 bg-[#FFC7F8] row-start-12 col-end-18 row-end-19">
@@ -86,12 +107,15 @@ export default function LandingCourses() {
             logo="bg-java"
             position="bg-center"
             needToContain={false}
+            onClick={() => {
+              navigate("./../course-details", {state : json[6]})
+            }}
           ></Box>
         </div>
         <div
           className={`border-[#09B28B] absolute border-2 h-3/4 w-3/4 top-1/3 left-2/3 -translate-x-2/3 -translate-y-1/3 z-0`}
         ></div>
       </div>
-    </div>
+    </section>
   );
 }

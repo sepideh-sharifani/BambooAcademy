@@ -8,18 +8,18 @@ interface InfoBoxProps {
 
 function InfoBox({ children }: InfoBoxProps) {
   return (
-    <div
+    <article
       className={`w-1/3 bg-black opacity-40 h-[45%] 
        m-[1px] text-black text-4xl flex flex-col justify-evenly items-center max-md:w-full `}
     >
       {children}
-    </div>
+    </article>
   );
 }
 
 export default function GeneralInfo() {
   return (
-    <div
+    <section
       className={`w-full bg-generalInfo h-[100vh] bg-no-repeat bg-fixed bg-cover bg-center 
        flex flex-row items-end max-md:flex-col max-md:items-stretch `}
     >
@@ -56,6 +56,6 @@ export default function GeneralInfo() {
           }
         </p>
       </InfoBox>
-    </div>
+    </section>
   );
 }
