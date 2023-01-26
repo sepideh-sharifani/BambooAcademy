@@ -8,6 +8,27 @@ module.exports = {
     {
       fontFamily: {
         "Lalezar": ["Lalezar", "sans-serif"]
+    },
+    colors:{
+      greenishBlue : '#004458',
+      footerBg : '#003544',
+      footerBg2: '#002B37',
+      footerText: '#09B28B'
+    },
+      width: {
+        '100': '50rem',
+    },
+    height:{
+      '100':'300px',
+    },
+    animation:{
+      'slideUp' : 'slideUp 0.5s ease',
+      'slideDown' : 'slideDown 0.5s ease'
+    },
+    keyframes:{
+      slideUp : {
+        '0%' : {transform: 'translateY(100%)'},
+        '100%' : {transform: 'translateY(0%)'},
       },
       backgroundImage: {
         'generalInfo': "url('./assets/neonbrand-zFSo6bnZJTw-unsplash.png')",
@@ -26,6 +47,10 @@ module.exports = {
         'bamboIcon': "url('./assets/bamboo c).png')",
         'jsMark': "url('./assets/jsMark.png')",
       },
+      slideDown : {
+        '0%' : {transform: 'translateY(-100%)'},
+        '100%' : {transform: 'translateY(0%)'},
+      }
     },
     gridTemplateRows: {
       '20': 'repeat(20, minmax(0, 1fr))',
@@ -126,4 +151,5 @@ module.exports = {
       '21': '21',
     }
   },
+}
 }
