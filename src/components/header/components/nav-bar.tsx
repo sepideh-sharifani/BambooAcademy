@@ -62,7 +62,7 @@ export default function NavBar() {
             <li className={`text-white text-xl p-4`}>
               {`مقالات`}
             </li>
-            <Link to={"/register"}>
+            <Link to={"/courses"}>
               <li className={`text-white text-xl p-4`}>
                 {`دوره‌ها`}
               </li>
