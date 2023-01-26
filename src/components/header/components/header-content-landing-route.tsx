@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router";
 
 
 export default function HeaderContentLandingRoute() {
-
+  const navigate = useNavigate();
+  
 
   return (
     <div
@@ -17,7 +19,9 @@ export default function HeaderContentLandingRoute() {
         }
       </p>
 
-      <button className={`bg-white px-10 py-5 self-center mt-[5rem]`}>{`مشاهده دوره‌ها`}</button>
+      <button className={`bg-white px-10 py-5 self-center mt-[5rem]`} onClick={()=> {
+        navigate("./../courses")
+      }}>{`مشاهده دوره‌ها`}</button>
     </div>
   );
 }

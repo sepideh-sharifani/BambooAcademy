@@ -34,7 +34,6 @@ function Box({ buttonText, logo, position, needToContain , onClick}: BoxProps) {
 
 export default function LandingCourses() {
   const navigate = useNavigate()
-  console.log('json' , json)
   // const navigationBtnHandler = (event, params) => {
   //   navigate(params)
   // }

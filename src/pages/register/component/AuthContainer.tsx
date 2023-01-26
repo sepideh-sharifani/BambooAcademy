@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Footer from '../../../components/Footer'
+import Footer from '../../../components/footer/footer'
 import { Login } from './Login'
 import { RegisterPart } from './RegisterPart'
 import { Reset } from './Reset'

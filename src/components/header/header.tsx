@@ -11,7 +11,6 @@ interface HeaderProps {
 
 export default function Header({ hideSearchBar = false }: HeaderProps) {
   const { pathname, state } = useLocation();
-  console.log("location", pathname, state);
 
   let bgColor: string = "";
   switch (pathname) {
@@ -64,7 +63,6 @@ export default function Header({ hideSearchBar = false }: HeaderProps) {
           hideSearchBar ? `hidden` : ""
         }`}
       >
-        <p>hi</p>
       </div>
     </>
   );
