@@ -6,6 +6,7 @@ import { BiHomeSmile } from 'react-icons/bi'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from 'react-router';
 
 interface buttonClickProps {
     onLogin: React.MouseEventHandler<HTMLAnchorElement>
@@ -45,7 +46,7 @@ export const RegisterPart = (props: buttonClickProps) => {
             .required("رمز عبور خود را تکرار کنید")
             .oneOf([Yup.ref("Password")], "رمز عبور ورودی مطابقت ندارد")
     });
-
+    const navigate = useNavigate()
     const [showCPassword, setShowCPassword] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
@@ -57,41 +58,41 @@ export const RegisterPart = (props: buttonClickProps) => {
 
     return (
         <section className='font-Lalezar'>
-            <div className='w-3/4 m-auto h-auto flex items-center justify-center rounded overflow-hidden bg-white shadow-lg md:w-full'>
-                <div className='relative mx-5 w-2/3 h-full flex flex-col justify-center items-center animate-slideUp'>
+            <div className='flex items-center justify-center w-3/4 h-auto m-auto overflow-hidden bg-white rounded shadow-lg md:w-full'>
+                <div className='relative flex flex-col items-center justify-center w-2/3 h-full mx-5 animate-slideUp'>
                     <h2 className='my-2 text-2xl'>ثبت نام</h2>
                     <form className='mx-5' onSubmit={handleSubmit(onSubmit)}>
-                        <input type="text" {...register("username")} className='w-full my-1 py-2 px-1 bg-gray-100 rounded-sm outline-none focus:border-b-2 focus:border-greenishBlue' placeholder='نام کاربری:' />
+                        <input type="text" {...register("username")} className='w-full px-1 py-2 my-1 bg-gray-100 rounded-sm outline-none focus:border-b-2 focus:border-greenishBlue' placeholder='نام کاربری:' />
                         {/* email validatation */}
-                        <input type="email" {...register("email")} className='w-full my-1 py-2 px-1 bg-gray-100 rounded-sm outline-none focus:border-b-2 focus:border-greenishBlue' placeholder='ایمیل*:' />
-                        <p className="text-red-700 text-sm">{errors.email?.message?.toString()}</p>
+                        <input type="email" {...register("email")} className='w-full px-1 py-2 my-1 bg-gray-100 rounded-sm outline-none focus:border-b-2 focus:border-greenishBlue' placeholder='ایمیل*:' />
+                        <p className="text-sm text-red-700">{errors.email?.message?.toString()}</p>
                         {/* phoneNumber validation */}
-                        <input type="number" {...register("phoneNumber", { required: true })} className='w-full my-1 py-2 px-1 bg-gray-100 rounded-sm outline-none focus:border-b-2 focus:border-greenishBlue' placeholder='شماره موبایل*:' />
-                        <p className="text-red-700 text-sm">{errors.phoneNumber?.message?.toString()}</p>
+                        <input type="number" {...register("phoneNumber", { required: true })} className='w-full px-1 py-2 my-1 bg-gray-100 rounded-sm outline-none focus:border-b-2 focus:border-greenishBlue' placeholder='شماره موبایل*:' />
+                        <p className="text-sm text-red-700">{errors.phoneNumber?.message?.toString()}</p>
                         {/* Identification Number validation */}
-                        <input type="number" {...register("ID", { required: true })} className='w-full my-1 py-2 px-1 bg-gray-100 rounded-sm outline-none focus:border-b-2 focus:border-greenishBlue' placeholder='شماره ملی*:' />
-                        <p className="text-red-700 text-sm">{errors.ID?.message?.toString()}</p>
+                        <input type="number" {...register("ID", { required: true })} className='w-full px-1 py-2 my-1 bg-gray-100 rounded-sm outline-none focus:border-b-2 focus:border-greenishBlue' placeholder='شماره ملی*:' />
+                        <p className="text-sm text-red-700">{errors.ID?.message?.toString()}</p>
                         {/* password, icon , validate */}
                         <div className="relative">
-                            <input type={showPassword ? "text" : "password"} {...register("Password")} className='w-full my-1 py-2 px-1 bg-gray-100 rounded-sm outline-none focus:border-b-2 focus:border-greenishBlue' placeholder='رمز عبور*:' />
-                            <p className="text-red-700 text-sm">{errors.Password?.message?.toString()}</p>
-                            <span onClick={() => { setShowPassword(!showPassword) }} className="absolute top-4 left-3 text-xl cursor-pointer text-greenishBlue">
+                            <input type={showPassword ? "text" : "password"} {...register("Password")} className='w-full px-1 py-2 my-1 bg-gray-100 rounded-sm outline-none focus:border-b-2 focus:border-greenishBlue' placeholder='رمز عبور*:' />
+                            <p className="text-sm text-red-700">{errors.Password?.message?.toString()}</p>
+                            <span onClick={() => { setShowPassword(!showPassword) }} className="absolute text-xl cursor-pointer top-4 left-3 text-greenishBlue">
                                 {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
                             </span>
                         </div>
                         {/* {password confirmation} */}
                         <div className="relative">
-                            <input type={showCPassword ? "text" : "password"} {...register("CPassword")} className='w-full my-1 py-2 px-1 bg-gray-100 rounded-sm outline-none focus:border-b-2 focus:border-greenishBlue' placeholder='تایید رمز عبور*:' />
-                            <p className="text-red-700 text-sm">{errors.CPassword?.message?.toString()}</p>
-                            <span onClick={() => { setShowCPassword(!showCPassword) }} className="absolute top-4 left-3 text-xl cursor-pointer text-greenishBlue">
+                            <input type={showCPassword ? "text" : "password"} {...register("CPassword")} className='w-full px-1 py-2 my-1 bg-gray-100 rounded-sm outline-none focus:border-b-2 focus:border-greenishBlue' placeholder='تایید رمز عبور*:' />
+                            <p className="text-sm text-red-700">{errors.CPassword?.message?.toString()}</p>
+                            <span onClick={() => { setShowCPassword(!showCPassword) }} className="absolute text-xl cursor-pointer top-4 left-3 text-greenishBlue">
                                 {showCPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
                             </span>
                         </div>
 
 
                         <div className='flex flex-row items-center justify-between'>
-                            <span className='text-sm'>حساب کاربری دارید؟<a href="#" className='text-sm mx-2 hover:text-lg' onClick={props.onLogin}>ورود</a></span>
-                            <button className='py-2 px-4 my-4 text-center border border-transparent rounded cursor-pointer transition duration-100 bg-greenishBlue text-white hover:bg-neutral-200 hover:text-black'>ثبت نام</button>
+                            <span className='text-sm'>حساب کاربری دارید؟<a href="#" className='mx-2 text-sm hover:text-lg' onClick={props.onLogin}>ورود</a></span>
+                            <button className='px-4 py-2 my-4 text-center text-white transition duration-100 border border-transparent rounded cursor-pointer bg-greenishBlue hover:bg-neutral-200 hover:text-black'>ثبت نام</button>
                         </div>
                     </form>
 
@@ -100,18 +101,18 @@ export const RegisterPart = (props: buttonClickProps) => {
                 </div>
                 <div className='hidden w-full h-full md:block md:relative'>
                     <img className='animate-slideDown' src={registerImg} alt="register" />
-                    <div className='absolute top-1/3 left-1/2 -translate-x-2/4 -tranlate-y-2/4 divide-y divide-white'>
-                        <div className='text-white text-2xl tracking-wider divide-y mb-4'>آکادمی آموزشی بامبو</div>
+                    <div className='absolute divide-y divide-white top-1/3 left-1/2 -translate-x-2/4 -tranlate-y-2/4'>
+                        <div className='mb-4 text-2xl tracking-wider text-white divide-y'>آکادمی آموزشی بامبو</div>
                         <div className='flex flex-row items-center justify-center'>
-                            <AiOutlineInstagram className='mt-2 mx-4 text-xl text-white cursor-pointer hover:text-orange-400' />
-                            <TbBrandTelegram className='mt-2 mx-4 text-xl text-white cursor-pointer hover:text-blue-400' />
-                            <AiOutlineWhatsApp className='mt-3 mx-4 text-xl text-white cursor-pointer hover:text-green-400' />
-                            <AiOutlineYoutube className='mt-3 mx-4 text-xl text-white cursor-pointer hover:text-red-700' />
+                            <AiOutlineInstagram className='mx-4 mt-2 text-xl text-white cursor-pointer hover:text-orange-400' />
+                            <TbBrandTelegram className='mx-4 mt-2 text-xl text-white cursor-pointer hover:text-blue-400' />
+                            <AiOutlineWhatsApp className='mx-4 mt-3 text-xl text-white cursor-pointer hover:text-green-400' />
+                            <AiOutlineYoutube className='mx-4 mt-3 text-xl text-white cursor-pointer hover:text-red-700' />
                         </div>
                     </div>
-                    <div className='absolute top-3/4 left-1/2 -translate-x-2/4'>
-                        <BiHomeSmile className='mt-2 mx-4 top-2/4 left-2/4 text-3xl text-white cursor-pointer' />
-                    </div>
+                    <button className='absolute top-3/4 left-1/2 -translate-x-2/4' onClick={() => navigate('./../landing')}>
+                        <BiHomeSmile className='mx-4 mt-2 text-3xl text-white cursor-pointer top-2/4 left-2/4' />
+                    </button>
                 </div>
             </div>
 
