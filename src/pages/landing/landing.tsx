@@ -11,11 +11,11 @@ export default function Landing() {
     <div className={`w-full absolute contents`}>
       <Header hideSearchBar={true} />
       <main>
-        <GeneralInfo></GeneralInfo>
-        <LandingCourses></LandingCourses>
-        <RoadMap></RoadMap>
-        <News></News>
-        <Suggestions></Suggestions>
+        <GeneralInfo />
+        <LandingCourses />
+        <RoadMap />
+        <News />
+        <Suggestions />
       </main>
     </div>
   );
