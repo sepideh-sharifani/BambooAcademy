@@ -79,7 +79,7 @@ const SingleCourseDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className={'w-full flex justify-between flex-row'}>
+            <div className={'w-full flex justify-between flex-row mb-10'}>
                 <div className={'relative w-full h-[23rem] bg-[#f9f9f9] flex justify-end'}>
                     <div className={'py-8 pl-24'}>
                         <h3 className={'text-4xl mb-2 font-bold text-[#004458]'}>
