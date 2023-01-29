@@ -11,7 +11,7 @@ import Footer from "../../components/footer";
 
 export default function Landing() {
   return (
-    <div className={`w-full absolute contents`} dir='ltr'>
+    <div className={`w-full relative`} dir='ltr'>
       <Header>
         <HeaderContentLandingRoute/>
       </Header>
