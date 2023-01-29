@@ -4,7 +4,9 @@ import Footer from "../../components/footer";
 export default function CourseDetails() {
     return (
         <>
-            <Header hideSearchBar={true}/>
+            <Header>
+                {/* course details header content */}
+            </Header>
             <SingleCourseDetails/>
             <Footer />
         </>
