@@ -9,7 +9,7 @@ export default function HeaderContentLandingRoute() {
         className="w-full bg-landingHeader h-[calc(100vh)] flex flex-col justify-center bg-[#088568] p-[5%] opacity-50"
         dir="rtl"
       >
-        <h2 className={`text-white text-5xl`}>
+        <h2 className={`text-white text-5xl opacity-100`}>
           {"باید راه بهتری برای آموزش ساخته میشد، پس ما ساختیمش  ..."}
         </h2>
         <p className="pt-10 text-2xl text-white">

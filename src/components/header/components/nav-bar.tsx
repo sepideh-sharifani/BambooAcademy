@@ -1,7 +1,30 @@
+import { divide } from "lodash";
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 export default function NavBar() {
+  const [logindata, setLoginData] = useState([]);
+
+
+  const loginUser = () => {
+    const getuser = localStorage.getItem("user_login");
+    if (getuser && getuser.length) {
+      const user = JSON.parse(getuser);
+      setLoginData(user);
+    }
+  }
+
+  useEffect(() => {
+    loginUser();
+  }, [])
+
+  const userlogout = () => {
+    localStorage.removeItem("user_login")
+    navigate("/");
+  }
+
+
+
   const [showBurger, setShowBurger] = useState(false);
   const navigate = useNavigate();
 
@@ -32,26 +55,33 @@ export default function NavBar() {
 
   return (
     <nav
-      className={` ${
-        !showBurger ? "border-b-[#D1D1D1] border-b-[1px]" : ""
-      } w-full xl:max-w-[90%] m-auto fixed top-0 left-1/2 -translate-x-1/2 z-20 h-[4rem]`}
+      className={` ${!showBurger ? "border-b-[#D1D1D1] border-b-[1px]" : ""
+        } w-full xl:max-w-[90%] m-auto fixed top-0 left-1/2 -translate-x-1/2 z-20 h-[4rem]`}
     >
       {!showBurger ? (
         <ul
-          className={`w-full flex justify-between h-full bg-black opacity-50`}
+          className={`w-full flex justify-between h-full bg-black bg-opacity-50`}
         >
-          <div className={` flex`}>
-            <Link to={"/register"}>
+          {logindata.length === 0 ? (<div className={` flex`}>
+            <Link to={"/register/register"}>
               <li className={`text-white text-xl p-4`}>
                 {`ثبت نام`}
               </li>
             </Link>
-            <Link to={"/register"}>
+            <Link to={"/register/login"}>
               <li className={`text-white text-xl p-4`}>
                 {`ورود`}
               </li>
             </Link>
-          </div>
+          </div>) : (
+            <div className={` flex`}>
+              <li className={`text-white text-xl p-4`}>
+                <button className="bg-black" onClick={userlogout}>خروج</button>
+              </li>
+              <li className={`text-white text-xl p-4`}>
+                خوش آمدید</li>
+            </div>)}
+
           <div className={` flex max-[650px]:hidden`}>
             <li className={`text-white text-xl p-4`}>
               {`درباره ما`}
@@ -101,18 +131,6 @@ export default function NavBar() {
             data-route="/courses"
           >
             {`دوره‌ها`}
-          </li>
-          <li
-            className={`nav-btn flex justify-center items-center grow border-b-2 text-white border-b-[#999]`}
-            data-route="/register"
-          >
-            {`ثبت نام `}
-          </li>
-          <li
-            className={`nav-btn flex justify-center items-center grow border-b-2 text-white border-b-[#999]`}
-            data-route="/register"
-          >
-            {`ورود`}
           </li>
         </ul>
       )}

@@ -8,12 +8,14 @@ import {
 } from "./components";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
+import { useState, useEffect } from "react";
 
 export default function Landing() {
+
   return (
     <div className={`w-full absolute contents`} dir='ltr'>
       <Header>
-        <HeaderContentLandingRoute/>
+        <HeaderContentLandingRoute />
       </Header>
       <main>
         <GeneralInfo />
@@ -22,7 +24,7 @@ export default function Landing() {
         <News />
         <Suggestions />
       </main>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
