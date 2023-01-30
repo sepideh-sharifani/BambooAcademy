@@ -7,6 +7,8 @@ module.exports = {
     extend: {
       fontFamily: {
         Lalezar: ["Lalezar", "sans-serif"],
+        Yekan: ["Yekan", "sans-serif"],
+        WYekan: ["W_yekan", "sans-serif"],
       },
       screens: {
         xs: "550px",
