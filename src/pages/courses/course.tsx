@@ -41,8 +41,15 @@ export default function Courses() {
         ? 4
         : 3
     );
-    console.log(screenWidth);
-    setScreenWidth(window.innerWidth);
+    const updateScreen = () => {
+      setScreenWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", updateScreen);
+
+    return () => {
+      window.removeEventListener("resize", updateScreen);
+    }
+
   }, [screenWidth]);
 
   return (
