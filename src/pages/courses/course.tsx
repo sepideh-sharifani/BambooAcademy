@@ -75,8 +75,8 @@ export default function Courses() {
           containerClassName="group flex-wrap p-3 pt-5 flex items-center justify-center max-w-1/3 mx-auto"
           pageLinkClassName="group px-3 py-2 text-sm cursor-pointer hover:bg-[#004458] hover:text-white transition group-hover:duration-100 group-hover:delay-100 group-text-[#004458] bg-transparent"
           pageClassName="py-2 mx-1"
-          previousClassName="mr-1 px-2 py-1 text-lg cursor-pointer  hover:bg-[#0f7898] transition hover:duration-100 hover:delay-100 text-white bg-[#004458]"
-          nextClassName="ml-1 px-2 py-1 text-lg cursor-pointer hover:bg-[#0f7898] hover:text-white transition hover:duration-100 hover:delay-100 text-white bg-[#004458]"
+          previousLinkClassName="mr-1 px-2 py-1 text-lg cursor-pointer  hover:bg-[#0f7898] transition hover:duration-100 hover:delay-100 text-white bg-[#004458]"
+          nextLinkClassName="ml-1 px-2 py-1 text-lg cursor-pointer hover:bg-[#0f7898] hover:text-white transition hover:duration-100 hover:delay-100 text-white bg-[#004458]"
           activeClassName="px-1 py-2 text-sm text-white hover:bg-[#004458] bg-[#004458]"
         />
       </main>
