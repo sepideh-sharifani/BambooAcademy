@@ -10,7 +10,7 @@ export default function Article() {
       flex flex-col justify-center p-4`}
         dir="rtl"
       >
-        <h2 className={`text-[#004458] text-3xl py-4`}>{"آخبار و مقالات"}</h2>
+        <h2 className={`text-[#004458] text-6xl py-4 font-Lalezar `}>{"اخبار و مقالات"}</h2>
         <p className={`text-[#7E7E7E] text-ellipsis font-WYekan text-2xl`}>
           {
             " دسترسی به جدیدترین و مفیدترین مقالات تالیف شده توسط معتبرترین روزنامه هاو رسانه ها در دسته بندی های گوناگونی همچون طراحی ، هنر، برنامه نویسی ، اقتصاد ، فلسفه ،فیزیک ،شیمی و ... "
