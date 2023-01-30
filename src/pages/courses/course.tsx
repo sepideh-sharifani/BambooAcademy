@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Data } from "./DataInterface";
 import data from "./data.json";
 import ReactPaginate from "react-paginate";
@@ -7,6 +7,7 @@ import Nav from "./components/Nav/Nav";
 import Cards from "./components/grid/Cards";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
+
 export default function Courses() {
   const [itemOffset, setItemOffset] = useState(0);
   const [posts, setPosts] = useState<Data[]>([]);
@@ -14,6 +15,8 @@ export default function Courses() {
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const getData = (datas: Data[]) => setPosts(datas);
+  let wrapperRef = useRef(null);
+  let refOfSearchBox: any;
 
   const endOffset = itemOffset + itemsPerPage;
   let currentItems = posts.slice(itemOffset, endOffset);
@@ -22,6 +25,17 @@ export default function Courses() {
   const handlePageClick = (event: any) => {
     const newOffset = (event.selected * itemsPerPage) % posts.length;
     setItemOffset(newOffset);
+  };
+
+  //when click on page expect searchbox ,searchbox disappear
+  function handleClickOutside() {
+    // if (wrapperRef !== refOfSearchBox) {
+      refOfSearchBox.current.classList.add("invisible")
+  // }
+}
+
+  const getRefSearchBox = (ref: any) => {
+    refOfSearchBox = ref;
   };
 
   useEffect(() => {
@@ -41,29 +55,36 @@ export default function Courses() {
         ? 4
         : 3
     );
+
+    //sensitive item of cards to window width
     const updateScreen = () => {
       setScreenWidth(window.innerWidth);
-    }
+    };
     window.addEventListener("resize", updateScreen);
 
+    //when click on page expect searchbox ,searchbox disappear 
+    window.addEventListener("mousedown", handleClickOutside);
+ 
     return () => {
       window.removeEventListener("resize", updateScreen);
-    }
+      window.removeEventListener("mousedown", handleClickOutside);
 
-  }, [screenWidth]);
+    };
+  }, [refOfSearchBox, screenWidth]);
 
   return (
-    <div dir="ltr">
+    <div dir="ltr" ref={wrapperRef} onClick={handleClickOutside}>
       <Header>
-        <div className={`w-full xl:max-w-[100%] h-[7rem] bg-[#004458] `}>
-          <div className={`h-[7rem] bg-coursesHeader opacity-50`}>
-            <Search data={posts} />
+        <div className={`w-full xl:max-w-[100%] h-[7rem] `}>
+          <div className={`h-[7rem] bg-coursesHeader`}>
+            <div className="absolute top-0 w-full h-full bg-[#0666839a]"></div>
+            <Search data={posts} getRefSearchBox={getRefSearchBox} />
           </div>
         </div>
       </Header>
       <main className="flex-col px-4 pt-5 sm:p-10 z-0 bg-[#E9E9E9]">
         <Nav getData={getData} />
-        <Cards loding={loding} currentPost={currentItems} />
+        <Cards loading={loding} currentPost={currentItems} />
         <ReactPaginate
           breakLabel="..."
           nextLabel=">"

@@ -4,15 +4,18 @@ import { Link } from "react-router-dom";
 import { Data } from "../../DataInterface";
 
 interface ISearch {
-  data: Data[];
+  data: Data[],
+  getRefSearchBox: (ref: any) => any
 }
 
-const Search = ({ data }: ISearch) => {
+const Search = ({ data ,getRefSearchBox}: ISearch) => {
   const inputEl = useRef<HTMLInputElement>(null);
   const [filteredData, setFilteredData] = useState<Data[]>([]);
   const [wordEntered, setWordEntered] = useState("");
+  const ref = useRef(null)
 
-  const handleFilter = (event: any) => {
+  const handleFilter = (event: any,ref:any) => {
+    if(ref.current.classList.contains("invisible")===true) ref.current.classList.remove("invisible")
     inputEl.current?.focus();
     const searchWord = event.target.value;
     setWordEntered(searchWord);
@@ -26,37 +29,42 @@ const Search = ({ data }: ISearch) => {
     }
   };
 
+  function handleClickSearchBox(){
+    getRefSearchBox(ref)
+  }
+
   return (
     <>
-      <div className="font-Lalezar bg-transparent absolute top-20 left-0 right-0 w-full flex flex-row-reverse items-center gap-2">
-        <div className="basis-1 p-2 flex self-start">
+      <div className="font-sans absolute top-[4.38rem] left-0 right-0 w-full flex flex-row-reverse items-center gap-2 z-10">
+        <div className="basis-1 p-2 mr-14 flex self-start bg-transparent">
           <FaSearch
-            size="1.2rem"
+            size="1.3rem"
             style={{ margin: "0 auto" }}
             cursor="pointer"
-            color="black"
-            onClick={handleFilter}
+            color="white"
+            onClick={(e)=>handleFilter(e,ref)}
           ></FaSearch>
         </div>
-        <div className="reletive basis-11/12 w-[calc(100%-200px)] ml-10 font-sans">
+        <div className="w-[calc(100%-200px)] ml-10">
           <input
-            className="cursor-pointer outline-[#4a4a4a] outline-0.5 tracking-wider bg-transparent text-black text-xl p-2 pt-1 mr-2 w-full rounded-3 text-right"
+            className="cursor-pointer outline-none tracking-wider bg-transparent text-white placeholder-white text-xl p-2 pb-[0.66rem] pt-1 mr-2 w-full rounded-3 "
+            dir="rtl"
             ref={inputEl}
             type="text"
-            placeholder="...جستوجو"
-            onChange={handleFilter}
+            placeholder="جستوجو..."
+            onChange={(e)=>handleFilter(e,ref)}
             value={wordEntered}
           />
-          <div className="flex justify-end">
+          <div className="flex justify-end" onClick={handleClickSearchBox} ref={ref}>
             {filteredData.length !== 0 && (
-              <div className=" w-2/3 min-h-0 max-h-[200px] flex flex-col justify-center items-end bg-white shadow-md shadow-slate-700 overflow-hidden overflow-y-auto scroll-smooth scrollbar-hide">
+              <div className=" w-full sm:w-2/3 min-h-0 max-h-[200px] flex flex-col justify-center items-end bg-white shadow-md shadow-slate-700 overflow-hidden overflow-y-auto scroll-smooth scrollbar-hide">
                 {filteredData.slice(0, 15).map((value, key) => {
                   return (
                     <Link
                       key={key}
                       className="w-full pr-3 max-h-[50px] min-h-[50px] flex items-center justify-end text-black hover:bg-zinc-300 transition hover:duration-100 "
-                      to={"#"}
-                      target="_blank"
+                      to={"/course-details"}
+                      target="_self"
                     >
                       <p className="ml-2">{value.headerCard} </p>
                     </Link>

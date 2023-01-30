@@ -5,10 +5,10 @@ import Modal from "../Modal/Modal";
 
 interface ICards {
   currentPost: Array<Data>;
-  loding: boolean;
+  loading: boolean;
 }
 //
-function Cards({ currentPost, loding }: ICards) {
+function Cards({ currentPost, loading }: ICards) {
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState<Data>({
     id: 1,
@@ -48,7 +48,7 @@ function Cards({ currentPost, loding }: ICards) {
                 card={post}
                 imgsrc={require("../../assets/" + post.srcImage + ".jpg")}
                 onclick={() => handleClickButton(post)}
-                loding={loding}
+                loading={loading}
               />
             ))}
         </article>

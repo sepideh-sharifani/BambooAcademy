@@ -53,7 +53,7 @@ function NavBody({ getData }: INavBody) {
   }, [datas]);
 
   return (
-    <ul className=" min-w-screen transition delay-150 list-none flex justify-around flex-row-reverse flex-none
+    <ul className="font-sans min-w-screen transition delay-150 list-none flex justify-around flex-row-reverse flex-none
      text-center gap-2 mt-2 items-center mx-5 sm:m-0">
       {dataNavBody.map((data,i) => (
         <li key={i} onClick={(e) => handleClick(e,i)} id={data.title}>
