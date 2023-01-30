@@ -9,6 +9,9 @@ interface INavBody {
 
 function NavBody({ getData }: INavBody) {
   const [datas, setDatas] = useState<Data[]>([]);
+  const [isActive,setIsActive] = useState([
+    true,false,false,false
+  ])
   const dataNavBody = [
     { title: "همه دوره ها", pointer: "دوره ها" },
     { title: "جدیدترین ها", pointer: "جدیدترین" },
@@ -16,7 +19,10 @@ function NavBody({ getData }: INavBody) {
     { title: "تکمیل نشده ها", pointer: "تکمیل نشده" },
   ];
 
-  function handleClick(e: any) {
+  function handleClick(e:  any,index:number) {
+    const wasActive = isActive.indexOf(true)
+    index !== wasActive && setIsActive(isActive.map((isActive,indexMap)=>isActive ? !isActive :indexMap === index ? !isActive : isActive))
+
     switch (e.currentTarget.id) {
       case "همه دوره ها":
         setDatas([...data]);
@@ -50,16 +56,13 @@ function NavBody({ getData }: INavBody) {
     <ul className=" min-w-screen transition delay-150 list-none flex justify-around flex-row-reverse flex-none
      text-center gap-2 mt-2 items-center mx-5 sm:m-0">
       {dataNavBody.map((data,i) => (
-        <li key={i} onClick={(e) => handleClick(e)} id={data.title}>
+        <li key={i} onClick={(e) => handleClick(e,i)} id={data.title}>
           <NavLink
-            className={({ isActive }) => {
-              return (
-                "text-center text-xs xxs:text-sm xxs:tracking-wide no-underline whitespace-nowrap p-0.5 xxs:p-2 w-full cursor-pointer" +
-                (isActive
-                  ? " text-[#eaeff1] hover:bg-[#025b76] bg-[#004458]"
-                  : " hover:text-[#eaeff1] bg-transparent hover:bg-[#3E7788] transition hover:duration-100 hover:delay-100 ")
-              );
-            }}
+            className={
+              `text-center text-xs xxs:text-sm xxs:tracking-wide no-underline whitespace-nowrap p-0.5 xxs:p-2 w-full cursor-pointer 
+              ${isActive[i]
+                ? " text-[#eaeff1] hover:bg-[#025b76] bg-[#004458]"
+                : " hover:text-[#eaeff1] bg-transparent hover:bg-[#3E7788] transition hover:duration-100 hover:delay-100 "}`}
             to={"#" + data.pointer}
           >
             {data.title}
