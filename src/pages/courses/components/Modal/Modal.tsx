@@ -14,7 +14,7 @@ function Modal({ open, modal, onclick, onclose }: IModal) {
   if (!open) return null;
 
   const handleChangingRoute = () => {
-    navigate("./../course-details", params);
+    navigate(`/courses/${params?.state?.altName}`);
   };
 
   return (
