@@ -1,9 +1,81 @@
 import React from "react";
 import {FaTrophy, FaBookOpen, FaChartLine} from "react-icons/fa";
+import {useParams} from "react-router-dom";
+import img3 from '../../courses/assets/img3.jpg'
+import img1 from '../../courses/assets/img1.jpg'
+import img2 from '../../courses/assets/img2.jpg'
+import img4 from '../../courses/assets/img4.jpg'
+import img5 from '../../courses/assets/img5.jpg'
+import img6 from '../../courses/assets/img6.jpg'
+import img7 from '../../courses/assets/img7.jpg'
+import img8 from '../../courses/assets/img8.jpg'
+import HeaderContentDetailsRoute from "./header-content-detail-route";
 
 const SingleCourseDetails = () => {
+
+    const {courseName} = useParams<{ courseName?: string }>();
+
+    const courseData: { [index: string]: any } = {
+        python: {
+            name: 'پایتون',
+            price: '200.000 تومن',
+            priceNumber: 200000,
+            imageSrc: img7,
+        },
+        sass: {
+            name: 'Sass',
+            price: '400.000 تومن',
+            priceNumber: 400000,
+            imageSrc: img3,
+        },
+        javascript: {
+            name: 'جاوا اسکریپت',
+            price: '200.000 تومن',
+            priceNumber: 200000,
+            imageSrc: img1,
+        },
+        'c-charp': {
+            name: 'سی شارپ',
+            price: '300.000 تومن',
+            priceNumber: 300000,
+            imageSrc: img2,
+        },
+        react: {
+            name: 'React',
+            price: '20.000 تومن',
+            priceNumber: 200000,
+            imageSrc: img4,
+        },
+        bootstrap: {
+            name: 'Bootstrap',
+            price: '500.000 تومن',
+            priceNumber: 500000,
+            imageSrc: img5,
+        },
+        java: {
+            name: 'Java',
+            price: '500.000 تومن',
+            priceNumber: 500000,
+            imageSrc: img6,
+        },
+        angular: {
+            name: 'Angular',
+            price: '600.000 تومن',
+            priceNumber: 600000,
+            imageSrc: img8,
+        },
+    }
+
     return (
         <>
+            <HeaderContentDetailsRoute
+                // mentorName={'ali'}
+                // title={'gg'}
+                // capacity={'33'}
+                // // studentsNumber={f}
+                // startDate={'123'}
+                // endDate={'3'}
+            />
             <div
                 className={'w-full flex flex-row items-center max-md:flex-col max-md:items-stretch gap-x-24 p-24'}>
                 <div className={'w-full'} dir={'rtl'}>
@@ -14,30 +86,32 @@ const SingleCourseDetails = () => {
                         امروزه به دلیل آن که ارتباطات فضای مجازی رونق زیادی یافته است طراحی یک سایت به شکل مناسب و
                         مورد پسند کاربران متفاوت اهمیت بالایی یافته است. به همین جهت صاحبان سرمایه و کار برای رونق کار
                         خود به دنبال طراحان حرفه ای برای طراحی سایتی مناسب و کارآمد هستند. لذا یادگیری روش های مناسب
-                        و به روز طراحی سایت مورد توجه بسیاری از علاقه مندان و کارجویان قرار گرفته است. جاوا اسکریپت زبان
+                        و به روز طراحی سایت مورد توجه بسیاری از علاقه مندان و کارجویان قرار گرفته است.
+                        {courseName != undefined && courseData[courseName].name}
+                        زبان
                         برنامه نویسی مفسری در سمت کلاینت است که می توان بوسیله سایتی مناسب و کارآمد هستند. لذا یادگیری
                         روش های مناسب و به روز طراحی سایت مورد توجه بسیاری از علاقه مندان و کارجویان قرار گرفته است.
-                        جاوا
-                        اسکریپت زبان برنامه نویسی مفسری در سمت کلاینت است که می توان بوسیله
+                        {courseName != undefined && courseData[courseName].name}
+                        زبان برنامه نویسی مفسری در سمت کلاینت است که می توان بوسیله
                     </p>
                 </div>
                 <div className={'w-[560px] p-3 bg-[#f9f9f9]'} dir={'rtl'}>
                     <div className={'flex items-end py-2 border-b-2 border-[#004458]'}>
                         <img
-                            src={require("./../../../assets/480px-Unofficial_JavaScript_logo_2.svg.png")}
+                            src={courseName != undefined && courseData[courseName].imageSrc}
                             className={" h-[2rem] w-[2rem] ml-2"}
                             alt="logo"
                             width={"2rem"}
                             height={"2rem"}
                         />
                         <p className={'text-l mb-2 font-bold text-[#004458] flex-auto'}>
-                            دوره جاوا اسکریپت
+                            دوره {courseName != undefined && courseData[courseName].name}
                         </p>
                     </div>
                     {[
                         {
                             title: 'قیمت دوره :',
-                            value: '۲۰۰.۰۰۰ تومن',
+                            value: courseName != undefined && courseData[courseName].price,
                             key: 'price',
                             style: 'text-[#004458] text-lg opacity-70',
                             valueStyle: 'text-[#004458] text-lg opacity-70'
@@ -51,7 +125,7 @@ const SingleCourseDetails = () => {
                         },
                         {
                             title: 'مبلغ قابل پرداخت :',
-                            value: '۱۸۰.۰۰۰ تومن',
+                            value: courseName != undefined && courseData[courseName].priceNumber * 0.9,
                             key: 'total',
                             style: 'text-[#004458] text-lg',
                             valueStyle: 'text-[#09b28b] text-lg opacity-70'
@@ -87,17 +161,17 @@ const SingleCourseDetails = () => {
                         </h3>
                         {[
                             {
-                                title: 'آشنایی با زبان برنامه نویسی جاوااسکریپت',
+                                title: `آشنایی با زبان برنامه نویسی ${courseName != undefined && courseData[courseName].name}`,
                                 icon: <FaBookOpen fontSize={"1.5rem"}/>,
                                 context: 'در پایان این دوره آموزشی ، شما دانشجوی گرامی، قادر به فهمی عمیق و مناسب نسبت به این زبان خواهید بود و به راحتی تسک های مربوط را انجام خواهیداد'
                             },
                             {
-                                title: 'آشنایی با زبان برنامه نویسی جاوااسکریپت',
+                                title: `آشنایی با زبان برنامه نویسی ${courseName != undefined && courseData[courseName].name}`,
                                 icon: <FaTrophy fontSize={"1.5rem"}/>,
                                 context: 'در پایان این دوره آموزشی ، شما دانشجوی گرامی، قادر به فهمی عمیق و مناسب نسبت به این زبان خواهید بود و به راحتی تسک های مربوط را انجام خواهیداد'
                             },
                             {
-                                title: 'آشنایی با زبان برنامه نویسی جاوااسکریپت',
+                                title: `آشنایی با زبان برنامه نویسی ${courseName != undefined && courseData[courseName].name}`,
                                 icon: <FaChartLine fontSize={"1.5rem"}/>,
                                 context: 'در پایان این دوره آموزشی ، شما دانشجوی گرامی، قادر به فهمی عمیق و مناسب نسبت به این زبان خواهید بود و به راحتی تسک های مربوط را انجام خواهیداد'
                             },

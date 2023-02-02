@@ -6,17 +6,11 @@ import {
   Suggestions,
   HeaderContentLandingRoute
 } from "./components";
-import Header from "../../components/header";
-import Footer from "../../components/footer";
-import { useState, useEffect } from "react";
 
 export default function Landing() {
-
   return (
-    <div className={`w-full relative`} dir='ltr'>
-      <Header>
-        <HeaderContentLandingRoute />
-      </Header>
+    <div className={`w-full absolute contents`} dir='ltr'>
+        <HeaderContentLandingRoute/>
       <main>
         <GeneralInfo />
         <LandingCourses />
@@ -24,7 +18,6 @@ export default function Landing() {
         <News />
         <Suggestions />
       </main>
-      <Footer />
     </div>
   );
 }
