@@ -6,19 +6,19 @@ interface ICard {
   card: Data;
   onclick: MouseEventHandler<HTMLButtonElement> | undefined;
   imgsrc: string;
-  loding: boolean;
+  loading: boolean;
 }
 
-function OneCard({ card, imgsrc, onclick, loding }: ICard) {
+function OneCard({ card, imgsrc, onclick, loading }: ICard) {
   const [isHovering, setIsHovering] = useState(false);
   const navigate = useNavigate();
   const params = { state: { ...card } };
 
-  if (loding) {
+  if (loading) {
     return (
       <>
         <div className="animate-spin"></div>
-        <span className="">lodding...</span>
+        <span className="">loading...</span>
       </>
     );
   }
@@ -34,6 +34,7 @@ function OneCard({ card, imgsrc, onclick, loding }: ICard) {
   const handleChangingRoute = () => {
     navigate("./../course-details", params);
   };
+
   return (
     <section
       className=" overflow-hidden w-full h-[25rem] xl:h-[27rem]  flex flex-col gap-2 min-w-0 bg-white shadow-md shadow-[#0000003c]"
@@ -41,7 +42,7 @@ function OneCard({ card, imgsrc, onclick, loding }: ICard) {
       onMouseOut={handleMouseOut}
     >
       <div
-        className={`max-h-56 shrink ${isHovering && " h-32 sm:h-40 lg:h-32"}`}
+        className={`max-h-56 shrink transition duration-1000 delay-1000 ${isHovering && " h-32 sm:h-40 lg:h-42"}`}
       >
         <img
           className="object-fill h-full w-full"
