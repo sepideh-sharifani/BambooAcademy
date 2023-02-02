@@ -70,8 +70,9 @@ const SingleCourseDetails = () => {
         <>
             <HeaderContentDetailsRoute
                 // mentorName={'ali'}
-                // title={'gg'}
+                title={`دوره‌ی ${courseName != undefined && courseData[courseName].name}`}
                 // capacity={'33'}
+                imageSrc={courseName != undefined && courseData[courseName].imageSrc}
                 // // studentsNumber={f}
                 // startDate={'123'}
                 // endDate={'3'}

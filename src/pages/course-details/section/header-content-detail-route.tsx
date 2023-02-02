@@ -31,7 +31,7 @@ export default function HeaderContentDetailsRoute({
   title = "دوره جاوااسکریپت",
   capacity = "59",
   studentsNumber = 53,
-  imageSrc = "",
+  imageSrc = "./../../../assets/jsMark.png",
   startDate = '1400/1/1',
   endDate= '1400/1/1'
 }: HeaderContentDetailsRouteProps) {
@@ -45,7 +45,7 @@ export default function HeaderContentDetailsRoute({
       >
         <div className={`h-[4rem] bg-blue-400`}></div>
         <img
-          src={require("./../../../assets/jsMark.png")}
+          src={imageSrc}
           className={" h-[14.3rem] w-[14.3rem]"}
           alt="logo"
           width={"14rem"}
