@@ -47,12 +47,12 @@ export default function Courses() {
         <div dir="ltr">
             <div className={`w-full xl:max-w-[100%] h-[7rem] bg-[#004458] `}>
                 <div className={`h-[7rem] bg-coursesHeader opacity-50`}>
-                    <Search data={posts}/>
+                    {/*<Search data={posts} getRefSearchBox />*/}
                 </div>
             </div>
             <main className="flex-col px-4 pt-5 sm:p-10 z-0 bg-[#E9E9E9]">
                 <Nav getData={getData}/>
-                <Cards loding={loding} currentPost={currentItems}/>
+                <Cards loading={loding} currentPost={currentItems}/>
                 <ReactPaginate
                     breakLabel="..."
                     nextLabel=">"

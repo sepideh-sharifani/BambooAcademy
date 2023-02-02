@@ -6,19 +6,19 @@ interface ICard {
     card: Data;
     onclick: MouseEventHandler<HTMLButtonElement> | undefined;
     imgsrc: string;
-    loding: boolean;
+    loading: boolean;
 }
 
-function OneCard({card, imgsrc, onclick, loding}: ICard) {
+function OneCard({card, imgsrc, onclick, loading}: ICard) {
     const [isHovering, setIsHovering] = useState(false);
     const navigate = useNavigate();
     const params = {state: {...card}};
 
-    if (loding) {
+    if (loading) {
         return (
             <>
                 <div className="animate-spin"></div>
-                <span className="">lodding...</span>
+                <span className="">loading...</span>
             </>
         );
     }
