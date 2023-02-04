@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Data} from "./DataInterface";
 import data from "./data.json";
 import ReactPaginate from "react-paginate";
@@ -7,12 +7,15 @@ import Nav from "./components/Nav/Nav";
 import Cards from "./components/grid/Cards";
 
 export default function Courses() {
+
     const [itemOffset, setItemOffset] = useState(0);
     const [posts, setPosts] = useState<Data[]>([]);
-    const [loding, setLoding] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [itemsPerPage, setItemsPerPage] = useState(8);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const getData = (datas: Data[]) => setPosts(datas);
+    let wrapperRef = useRef(null);
+    let refOfSearchBox: any;
 
     const endOffset = itemOffset + itemsPerPage;
     let currentItems = posts.slice(itemOffset, endOffset);
@@ -23,11 +26,22 @@ export default function Courses() {
         setItemOffset(newOffset);
     };
 
+    //when click on page expect searchBox ,searchBox disappear
+    function handleClickOutside() {
+        // if (wrapperRef !== refOfSearchBox) {
+        refOfSearchBox.current.classList.add("invisible")
+        // }
+    }
+
+    const getRefSearchBox = (ref: any) => {
+        refOfSearchBox = ref;
+    };
+
     useEffect(() => {
         const fetchPosts = () => {
-            setLoding(true);
+            setLoading(true);
             setPosts(data);
-            setLoding(false);
+            setLoading(false);
         };
         fetchPosts();
 
@@ -40,19 +54,34 @@ export default function Courses() {
                         ? 4
                         : 3
         );
-        setScreenWidth(window.innerWidth);
-    }, [screenWidth]);
+
+        //sensitive item of cards to window width
+        const updateScreen = () => {
+            setScreenWidth(window.innerWidth);
+        };
+        window.addEventListener("resize", updateScreen);
+
+        //when click on page expect searchBox ,searchBox disappear
+        window.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            window.removeEventListener("resize", updateScreen);
+            window.removeEventListener("mousedown", handleClickOutside);
+
+        };
+    }, [refOfSearchBox, screenWidth]);
 
     return (
-        <div dir="ltr">
-            <div className={`w-full xl:max-w-[100%] h-[7rem] bg-[#004458] `}>
-                <div className={`h-[7rem] bg-coursesHeader opacity-50`}>
-                    {/*<Search data={posts} getRefSearchBox />*/}
+        <div dir="ltr" ref={wrapperRef} onClick={handleClickOutside}>
+            <div className={`w-full xl:max-w-[100%] h-[7rem] `}>
+                <div className={`h-[7rem] bg-coursesHeader`}>
+                    {/*<div className="absolute top-0 w-full h-full bg-[#0666839a]"/>*/}
+                    <Search data={posts} getRefSearchBox={getRefSearchBox}/>
                 </div>
             </div>
             <main className="flex-col px-4 pt-5 sm:p-10 z-0 bg-[#E9E9E9]">
                 <Nav getData={getData}/>
-                <Cards loading={loding} currentPost={currentItems}/>
+                <Cards loading={loading} currentPost={currentItems}/>
                 <ReactPaginate
                     breakLabel="..."
                     nextLabel=">"

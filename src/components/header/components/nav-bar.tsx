@@ -48,6 +48,7 @@ export default function NavBar() {
   }, [navigate, showBurger]);
 
   const clickHandler = useCallback((event: any) => {
+    navigate(`/`)
     event.stopPropagation();
     if (window.innerWidth > 650) return;
     setShowBurger(true);
