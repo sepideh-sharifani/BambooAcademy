@@ -10,18 +10,7 @@ interface ICards {
 //
 function Cards({ currentPost, loading }: ICards) {
   const [openModal, setOpenModal] = useState(false);
-  const [modalData, setModalData] = useState<any>({
-    id: 1,
-    srcImage: "img5",
-    altName: "angular",
-    presenter: "فربد مهدوی",
-    capacity: "78",
-    headerCard: " angular دوره",
-    price: "600,000",
-    courseStatus: 95,
-    startDate: "1401/08/01",
-    endDate: "1401/12/01",
-  });
+  const [modalData, setModalData] = useState<any>({});
   const myref = useRef<HTMLDivElement | null>(null);
 
   function handleClickModal() {

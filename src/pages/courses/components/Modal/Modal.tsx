@@ -41,7 +41,7 @@ function Modal({ open, modal, onclick, onclose }: IModal) {
             />
           </div>
           <h2 className="text-[#004458] text-xl mt-2">{modal.title}</h2>
-          <p>مدرس : {modal.teacher.fullName}</p>
+          <p> {modal.teacher.fullName} : مدرس</p>
           <p>ظرفیت : {modal.capacity} نفر</p>
           <p>تاریخ شروع :{modal.startDate.slice(0,10)}</p>
           <p>تاریخ پایان : {modal.startDate.slice(0,10)} </p>
@@ -54,9 +54,9 @@ function Modal({ open, modal, onclick, onclose }: IModal) {
               <div className="w-3/5 bg-gray-200">
                 <div
                   className="bg-[#004458] text-sm font-medium text-white text-left p-1 pl-2"
-                  style={{ width: `${modal.capacity}%` }}
+                  style={{ width: `${(modal.capacity)}%` }}
                 >
-                  % {modal.courseStatus}
+                  % {(modal.capacity)}
                 </div>
               </div>
             </div>
@@ -67,7 +67,7 @@ function Modal({ open, modal, onclick, onclose }: IModal) {
           <div className="w-4/5 h-[1.8px] bg-slate-400 mx-auto "></div>
           <button
             className="self-start text-sm text-[#004458] bg-[#DBDBDB] hover:text-white hover:bg-[#004458] 
-            p-3"
+            hover:shadow-lg hover:shadow-slate-400 rounded-sm p-3 "
             onClick={handleChangingRoute}
           >
             مشاهده کامل

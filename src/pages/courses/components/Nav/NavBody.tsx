@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import data from "../../data.json";
-import { Data } from "../../DataInterface";
+// import { Data } from "../../DataInterface";
 
 interface INavBody {
-  getData: (datas: Data[]) => void;
+  getData: (datas: any[]) => void;
+  cardData: any
 }
 
-function NavBody({ getData }: INavBody) {
-  const [datas, setDatas] = useState<Data[]>([]);
+function NavBody({ getData,cardData }: INavBody) {
+  const [datas, setDatas] = useState<any[]>([]);
   const [isActive,setIsActive] = useState([
     true,false,false,false
   ])
@@ -25,11 +26,11 @@ function NavBody({ getData }: INavBody) {
 
     switch (e.currentTarget.id) {
       case "همه دوره ها":
-        setDatas([...data]);
+        setDatas([...cardData]);
         break;
       case "جدیدترین ها":
         setDatas(
-          [...data].sort((a, b) =>
+          [...cardData].sort((a, b) =>
             b.startDate
               .split("/")
               .join()
@@ -38,10 +39,10 @@ function NavBody({ getData }: INavBody) {
         );
         break;
       case "گران ترین ها":
-        setDatas([...data].sort((a, b) => Number(b.price) - Number(a.price)));
+        setDatas([...cardData].sort((a, b) => Number(b.cost) - Number(a.cost)));
         break;
       case "تکمیل نشده ها":
-        setDatas([...data].filter((a) => a.courseStatus !== 100));
+        setDatas([...cardData].filter((a) => a.capacity !== 100));
         break;
       default:
         return;

@@ -1,16 +1,16 @@
 import {useRef, useState} from "react";
 import {FaSearch} from "react-icons/fa";
 import {Link} from "react-router-dom";
-import {Data} from "../../DataInterface";
+// import {Data} from "../../DataInterface";
 
 interface ISearch {
-    data: Data[],
+    data: any[],
     getRefSearchBox: (ref: any) => any
 }
 
 const Search = ({data, getRefSearchBox}: ISearch) => {
     const inputEl = useRef<HTMLInputElement>(null);
-    const [filteredData, setFilteredData] = useState<Data[]>([]);
+    const [filteredData, setFilteredData] = useState<any[]>([]);
     const [wordEntered, setWordEntered] = useState("");
     const ref = useRef(null)
 
@@ -20,7 +20,8 @@ const Search = ({data, getRefSearchBox}: ISearch) => {
         const searchWord = event.target.value;
         setWordEntered(searchWord);
         const newFilter = [...data].filter((value) => {
-            return value.headerCard.toLowerCase().includes(searchWord.toLowerCase());
+            return value.title.toLowerCase().includes(searchWord.toLowerCase());
+
         });
         if (searchWord === "") {
             setFilteredData([]);
@@ -65,10 +66,10 @@ const Search = ({data, getRefSearchBox}: ISearch) => {
                                         <Link
                                             key={key}
                                             className="w-full pr-3 max-h-[50px] min-h-[50px] flex items-center justify-end text-black hover:bg-zinc-300 transition hover:duration-100 "
-                                            to={`/courses/${value?.altName}`}
+                                            to={`/courses/${value?.title}`}
                                             target="_self"
                                         >
-                                            <p className="ml-2">{value.headerCard} </p>
+                                            <p className="ml-2">{value.title} </p>
                                         </Link>
                                     );
                                 })}

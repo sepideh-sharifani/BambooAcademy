@@ -52,16 +52,16 @@ function OneCard({ card, imgsrc, onclick, loading }: ICard) {
   };
   return (
     <section
-      className="overflow-hidden w-full h-[25rem] xl:h-[27rem]  flex flex-col gap-2 min-w-0 bg-white shadow-sm hover:shadow-lg shadow-[#00000097] hover:shadow-[#0000005d] rounded-lg group"
+      className="relative overflow-hidden w-full h-[25rem] xl:h-[27rem]  flex flex-col gap-2 min-w-0 bg-white shadow-sm hover:shadow-lg shadow-[#00000097] hover:shadow-[#0000005d] rounded-lg group"
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
     >
       {/* ${isHovering && " h-32 sm:h-40 lg:h-32"} */}
       <div
-        className={`max-h-56 min-h-32 w-full shrink group-hover:-translate-y-10 duration-300`}
+        className={`max-h-56 w-full shrink group-hover:-translate-y-10 duration-300`}
       >
         <img
-          className="bg-slate-300 object-fill h-full w-full"
+          className="bg-slate-300 object-cover h-full w-full"
           src={card.lesson.image}
           alt={card.title}
         />
@@ -74,7 +74,7 @@ function OneCard({ card, imgsrc, onclick, loading }: ICard) {
           {card.lesson.lessonName}
         </h1>
         <p className="grow text-[#3E7788] text-sm ">
-          مدرس : {card.teacher.fullName}
+           {card.teacher.fullName}  : مدرس 
         </p>
         <div className="grow gap-2 xs:gap-0 flex xs:flex-row-reverse justify-between flex-col text-sm">
           <p className="text-[#3E7788] ">ظرفیت : {card.capacity} نفر</p>
@@ -93,9 +93,9 @@ function OneCard({ card, imgsrc, onclick, loading }: ICard) {
       </div>
 
       <button
-        className="self-center flex-none whitespace-nowrap mb-3
+        className={`self-center absolute -bottom-2 whitespace-nowrap mb-3
                 rounded-md px-1.5 py-[0.4rem] pb-3 mx-auto text-[#004458] bg-[#DBDBDB] hover:text-white 
-                 hover:bg-[#3E7788] group-hover:-translate-y-10 translate-y-10 duration-300 shadow-lg shadow-slate-200"
+                 hover:bg-[#3E7788] group-hover:-translate-y-5 translate-y-16 duration-500 shadow-lg shadow-slate-200`}
         onClick={handleChangingRoute}
       >
         مشاهده دوره

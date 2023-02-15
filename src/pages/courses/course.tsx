@@ -1,31 +1,42 @@
 import {useEffect, useRef, useState} from "react";
 import {Data} from "./DataInterface";
-import data from "./data.json";
-import ReactPaginate from "react-paginate";
 import Search from "./components/Search/Search";
 import Nav from "./components/Nav/Nav";
+import Paginate from "./components/Pagination";
 import Cards from "./components/grid/Cards";
 import axios from "axios"
 
 export default function Courses() {
 
-    const [itemOffset, setItemOffset] = useState(0);
-    const [posts, setPosts] = useState<Data[]>([]);
+    const [posts, setPosts] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
-    const [itemsPerPage, setItemsPerPage] = useState(8);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(1);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    const getData = (datas: Data[]) => setPosts(datas);
+    const getData = (datas: any[]) => setPosts(datas);
     let wrapperRef = useRef(null);
     let refOfSearchBox: any;
 
-    const endOffset = itemOffset + itemsPerPage;
-    let currentItems = posts.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(posts.length / itemsPerPage);
+    //pagination 
+    const indexOfLastPost = currentPage *itemsPerPage;
+	const indexOfFirstPost = indexOfLastPost - itemsPerPage;
+	const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-    const handlePageClick = (event: any) => {
-        const newOffset = (event.selected * itemsPerPage) % posts.length;
-        setItemOffset(newOffset);
-    };
+    const paginate = (pageNumber:number) => {
+		setCurrentPage(pageNumber);
+	};
+
+	const previousPage = () => {
+		if (currentPage !== 1) {
+			setCurrentPage(currentPage - 1);
+		}
+	};
+
+	const nextPage = () => {
+		if (currentPage !== Math.ceil(posts.length / itemsPerPage)) {
+			setCurrentPage(currentPage + 1);
+		}
+	};
 
     // when click on page expect searchBox ,searchBox disappear
     // function handleClickOutside() {
@@ -52,14 +63,15 @@ export default function Courses() {
     useEffect(() => {
         fetchPosts();
 
+        console.log(posts.length>=8)
         setItemsPerPage(
-            screenWidth >= 1024
+             (screenWidth >= 1024) && posts.length<8
                 ? 8
-                : screenWidth >= 768 && screenWidth < 1024
+                : (posts.length>=6) && (screenWidth >= 768) && (screenWidth < 1024)
                     ? 6
-                    : screenWidth > 460 && screenWidth < 768
+                    : (screenWidth > 460) && (screenWidth < 768) && (posts.length>=4)
                         ? 4
-                        : 3
+                        :3
         );
 
         //sensitive item of cards to window width
@@ -87,23 +99,16 @@ export default function Courses() {
                 </div>
             </div>
             <main className="flex-col px-4 pt-5 sm:p-10 z-0 bg-[#E9E9E9]">
-                <Nav getData={getData}/>
-                <Cards loading={loading} currentPost={currentItems}/>
-                <ReactPaginate
-                    breakLabel="..."
-                    nextLabel=">"
-                    onPageChange={handlePageClick}
-                    pageRangeDisplayed={3}
-                    pageCount={pageCount}
-                    previousLabel="<"
-                    renderOnZeroPageCount={() => null}
-                    containerClassName="group flex-wrap p-3 pt-5 flex items-center justify-center max-w-1/3 mx-auto"
-                    pageLinkClassName="group px-3 py-2 text-sm cursor-pointer hover:bg-[#004458] hover:text-white transition group-hover:duration-100 group-hover:delay-100 group-text-[#004458] bg-transparent"
-                    pageClassName="py-2 mx-1"
-                    previousClassName="mr-1 px-2 py-1 text-lg cursor-pointer  hover:bg-[#0f7898] transition hover:duration-100 hover:delay-100 text-white bg-[#004458]"
-                    nextClassName="ml-1 px-2 py-1 text-lg cursor-pointer hover:bg-[#0f7898] hover:text-white transition hover:duration-100 hover:delay-100 text-white bg-[#004458]"
-                    activeClassName="px-1 py-2 text-sm text-white hover:bg-[#004458] bg-[#004458]"
-                />
+                <Nav getData={getData} cardData={posts}/>
+                <Cards loading={loading} currentPost={currentPosts}/>
+                <Paginate
+						postsPerPage={itemsPerPage}
+						totalPosts={posts.length}
+						currentPage={currentPage}
+						paginate={paginate}
+						previousPage={previousPage}
+						nextPage={nextPage}
+					/>
             </main>
         </div>
     );
