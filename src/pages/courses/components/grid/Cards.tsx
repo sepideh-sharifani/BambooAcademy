@@ -1,16 +1,16 @@
 import OneCard from "./OneCard";
-import { Data } from "../../DataInterface";
+// import { Data } from "../../DataInterface";
 import { useState, useRef } from "react";
 import Modal from "../Modal/Modal";
 
 interface ICards {
-  currentPost: Array<Data>;
+  currentPost: Array<any>;
   loading: boolean;
 }
 //
 function Cards({ currentPost, loading }: ICards) {
   const [openModal, setOpenModal] = useState(false);
-  const [modalData, setModalData] = useState<Data>({
+  const [modalData, setModalData] = useState<any>({
     id: 1,
     srcImage: "img5",
     altName: "angular",
@@ -28,7 +28,7 @@ function Cards({ currentPost, loading }: ICards) {
     setOpenModal(false);
   }
 
-  function handleClickButton(post: Data) {
+  function handleClickButton(post: any) {
     setOpenModal(true);
     setModalData(post);
   }
@@ -44,9 +44,9 @@ function Cards({ currentPost, loading }: ICards) {
           {currentPost &&
             currentPost.map((post) => (
               <OneCard
-                key={post.id}
+                key={post._id}
                 card={post}
-                imgsrc={require("../../assets/" + post.srcImage + ".jpg")}
+                imgsrc={post.lesson.image}
                 onclick={() => handleClickButton(post)}
                 loading={loading}
               />

@@ -59,7 +59,7 @@ function NavBody({ getData }: INavBody) {
         <li key={i} onClick={(e) => handleClick(e,i)} id={data.title}>
           <NavLink
             className={
-              `text-center text-xs xxs:text-sm xxs:tracking-wide no-underline whitespace-nowrap p-0.5 xxs:p-2 w-full cursor-pointer 
+              `rounded-sm text-center text-xs xxs:text-sm xxs:tracking-wide no-underline whitespace-nowrap p-0.5 xxs:p-2 w-full cursor-pointer 
               ${isActive[i]
                 ? " text-[#eaeff1] hover:bg-[#025b76] bg-[#004458]"
                 : " hover:text-[#eaeff1] bg-transparent hover:bg-[#3E7788] transition hover:duration-100 hover:delay-100 "}`}

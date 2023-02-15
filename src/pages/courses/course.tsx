@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 import Search from "./components/Search/Search";
 import Nav from "./components/Nav/Nav";
 import Cards from "./components/grid/Cards";
+import axios from "axios"
 
 export default function Courses() {
 
@@ -26,23 +27,29 @@ export default function Courses() {
         setItemOffset(newOffset);
     };
 
-    //when click on page expect searchBox ,searchBox disappear
-    function handleClickOutside() {
-        // if (wrapperRef !== refOfSearchBox) {
-        refOfSearchBox.current.classList.add("invisible")
-        // }
-    }
+    // when click on page expect searchBox ,searchBox disappear
+    // function handleClickOutside() {
+    //     // if (wrapperRef !== refOfSearchBox) {
+    //     refOfSearchBox.current.classList.add("invisible")
+    //     // }
+    // }
 
     const getRefSearchBox = (ref: any) => {
         refOfSearchBox = ref;
     };
 
+    const dataCards = axios.create({
+        baseURL: "http://localhost:5000/" 
+     });
+
+    const fetchPosts = async() => {
+        setLoading(true);
+        let response = await dataCards.get("api/course/getall")
+        setPosts(response.data.result);
+        setLoading(false);
+    };
+
     useEffect(() => {
-        const fetchPosts = () => {
-            setLoading(true);
-            setPosts(data);
-            setLoading(false);
-        };
         fetchPosts();
 
         setItemsPerPage(
@@ -62,20 +69,20 @@ export default function Courses() {
         window.addEventListener("resize", updateScreen);
 
         //when click on page expect searchBox ,searchBox disappear
-        window.addEventListener("mousedown", handleClickOutside);
+        // window.addEventListener("mousedown", handleClickOutside);
 
         return () => {
             window.removeEventListener("resize", updateScreen);
-            window.removeEventListener("mousedown", handleClickOutside);
+            // window.removeEventListener("mousedown", handleClickOutside);
 
         };
     }, [refOfSearchBox, screenWidth]);
 
     return (
-        <div dir="ltr" ref={wrapperRef} onClick={handleClickOutside}>
-            <div className={`w-full xl:max-w-[100%] h-[7rem] `}>
-                <div className={`h-[7rem] bg-coursesHeader`}>
-                    {/*<div className="absolute top-0 w-full h-full bg-[#0666839a]"/>*/}
+        <div dir="ltr" ref={wrapperRef}>
+            <div className="w-full xl:max-w-[100%] h-[7rem]" >
+                <div className="h-[7rem] bg-coursesHeader">
+                    <div className="absolute top-0 w-full h-[7rem] bg-[#0666836c]"/>
                     <Search data={posts} getRefSearchBox={getRefSearchBox}/>
                 </div>
             </div>

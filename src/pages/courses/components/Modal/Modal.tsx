@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Data } from "../../DataInterface";
 
 interface IModal {
-  modal: Data;
+  modal: any;
   open: boolean;
   onclick: () => void;
   onclose: () => void;
@@ -35,18 +35,18 @@ function Modal({ open, modal, onclick, onclose }: IModal) {
           </span>
           <div className="w-24 h-24 sm:w-40 sm:h-36 top-6 left-6 absolute flex-none bg-current">
             <img
-              src={require("../../assets/" + modal.srcImage + ".jpg")}
-              alt={modal.altName}
+              src={modal.lesson.image}
+              alt={modal.title}
               className="object-fill w-full h-full"
             />
           </div>
-          <h2 className="text-[#004458] text-xl mt-2">{modal.headerCard}</h2>
-          <p>مدرس : {modal.presenter}</p>
+          <h2 className="text-[#004458] text-xl mt-2">{modal.title}</h2>
+          <p>مدرس : {modal.teacher.fullName}</p>
           <p>ظرفیت : {modal.capacity} نفر</p>
-          <p>تاریخ شروع :{modal.startDate}</p>
-          <p>تاریخ پایان : {modal.endDate} </p>
+          <p>تاریخ شروع :{modal.startDate.slice(0,10)}</p>
+          <p>تاریخ پایان : {modal.startDate.slice(0,10)} </p>
           <p>
-            قیمت : <span className="text-[#09B28B]"> {modal.price} تومان</span>
+            قیمت : <span className="text-[#09B28B]"> {modal.cost} تومان</span>
           </p>
           <div className="flex flex-row-reverse gap-3 justify-end">
             <p className="whitespace-nowrap">: وضعیت دوره </p>
@@ -54,7 +54,7 @@ function Modal({ open, modal, onclick, onclose }: IModal) {
               <div className="w-3/5 bg-gray-200">
                 <div
                   className="bg-[#004458] text-sm font-medium text-white text-left p-1 pl-2"
-                  style={{ width: `${modal.courseStatus}%` }}
+                  style={{ width: `${modal.capacity}%` }}
                 >
                   % {modal.courseStatus}
                 </div>
