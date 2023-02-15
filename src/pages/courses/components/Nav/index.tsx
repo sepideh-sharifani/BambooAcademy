@@ -1,6 +1,6 @@
 import NavHeader from "./NavHeader";
 import NavBody from "./NavBody";
-import { Data } from "../../DataInterface";
+// import { Data } from "../../DataInterface";
 interface INav {
   getData: (datas: any[]) => void;
   cardData:any

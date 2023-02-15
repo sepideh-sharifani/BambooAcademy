@@ -1,7 +1,7 @@
 import OneCard from "./OneCard";
 // import { Data } from "../../DataInterface";
 import { useState, useRef } from "react";
-import Modal from "../Modal/Modal";
+import Modal from "../Modal";
 
 interface ICards {
   currentPost: Array<any>;
@@ -21,7 +21,7 @@ function Cards({ currentPost, loading }: ICards) {
     setOpenModal(true);
     setModalData(post);
   }
-  
+
   return (
     <>
       <div>

@@ -1,6 +1,6 @@
 import { MouseEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Data } from "../../DataInterface";
+import { Data } from "../../../DataInterface";
 
 interface ICard {
   card: any;
@@ -56,13 +56,12 @@ function OneCard({ card, imgsrc, onclick, loading }: ICard) {
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
     >
-      {/* ${isHovering && " h-32 sm:h-40 lg:h-32"} */}
       <div
         className={`max-h-56 w-full shrink group-hover:-translate-y-10 duration-300`}
       >
         <img
           className="bg-slate-300 object-cover h-full w-full"
-          src={card.lesson.image}
+          src={imgsrc}
           alt={card.title}
         />
       </div>
@@ -74,7 +73,7 @@ function OneCard({ card, imgsrc, onclick, loading }: ICard) {
           {card.lesson.lessonName}
         </h1>
         <p className="grow text-[#3E7788] text-sm ">
-           {card.teacher.fullName}  : مدرس 
+          {card.teacher.fullName} : مدرس
         </p>
         <div className="grow gap-2 xs:gap-0 flex xs:flex-row-reverse justify-between flex-col text-sm">
           <p className="text-[#3E7788] ">ظرفیت : {card.capacity} نفر</p>
