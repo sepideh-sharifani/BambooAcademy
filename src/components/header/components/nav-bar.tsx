@@ -1,6 +1,5 @@
-import { divide } from "lodash";
 import { useEffect, useState, useCallback } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import Link from "next/Link"
 
 export default function NavBar() {
   const [logindata, setLoginData] = useState([]);
@@ -20,13 +19,13 @@ export default function NavBar() {
 
   const userlogout = () => {
     localStorage.removeItem("user_login")
-    navigate("/");
+    // navigate("/");
   }
 
 
 
   const [showBurger, setShowBurger] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     if (!showBurger) return;
@@ -35,7 +34,7 @@ export default function NavBar() {
       if (!showBurger) return;
       else if (event.target.classList.contains("nav-btn")) {
         event.target.dataset.route &&
-          navigate(`./..${event.target.dataset.route}`);
+          // navigate(`./..${event.target.dataset.route}`);
         setShowBurger(false);
       } else setShowBurger(false);
     };
@@ -45,10 +44,9 @@ export default function NavBar() {
     return () => {
       document.body.removeEventListener("click", bodyHandler);
     };
-  }, [navigate, showBurger]);
-
+  }, [showBurger]);
+//navigate
   const clickHandler = useCallback((event: any) => {
-    navigate(`/`)
     event.stopPropagation();
     if (window.innerWidth > 650) return;
     setShowBurger(true);
@@ -64,12 +62,12 @@ export default function NavBar() {
           className={`w-full flex justify-between h-full bg-black bg-opacity-50`}
         >
           {logindata.length === 0 ? (<div className={` flex`}>
-            <Link to={"/register/register"}>
+            <Link href={"/register/register"}>
               <li className={`text-white text-xl p-4`}>
                 {`ثبت نام`}
               </li>
             </Link>
-            <Link to={"/register/login"}>
+            <Link href={"/register/login"}>
               <li className={`text-white text-xl p-4`}>
                 {`ورود`}
               </li>
@@ -93,7 +91,7 @@ export default function NavBar() {
             <li className={`text-white text-xl p-4`}>
               {`مقالات`}
             </li>
-            <Link to={"/courses"}>
+            <Link href={"/courses"}>
               <li className={`text-white text-xl p-4`}>
                 {`دوره‌ها`}
               </li>

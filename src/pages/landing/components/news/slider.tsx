@@ -1,10 +1,10 @@
 import {  useState } from "react";
 import { IoChevronBack } from "react-icons/io5";
 import { IoChevronForward } from "react-icons/io5";
-import imgOne from "./../../../../assets/scott-graham-5fNmWej4tAA-unsplash.png";
-import imgTwo from "./../../../../assets/brooke-cagle-g1Kr4Ozfoac-unsplash.png";
-import imgThree from "./../../../../assets/neonbrand-1-aA2Fadydc-unsplash.png";
-import imgFour from "./../../../../assets/neonbrand-zFSo6bnZJTw-unsplash.png";
+import imgOne from "./../../../../../public/assets/scott-graham-5fNmWej4tAA-unsplash.png";
+import imgTwo from "./../../../../../public/assets/brooke-cagle-g1Kr4Ozfoac-unsplash.png";
+import imgThree from "./../../../../../public/assets/neonbrand-1-aA2Fadydc-unsplash.png";
+import imgFour from "./../../../../../public/assets/neonbrand-zFSo6bnZJTw-unsplash.png";
 
 const sources: any[] = [imgOne, imgTwo, imgThree, imgFour];
 

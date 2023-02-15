@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { AiOutlineInstagram, AiOutlineWhatsApp, AiOutlineYoutube } from 'react-icons/ai'
 import { TbBrandTelegram } from 'react-icons/tb'
-import namadEtemad from './../../assets/enamad.png'
-import kasboKar from './../../assets/kasboKar.png'
-import samandehi from './../../assets/samandehi.png'
+import namadEtemad from '../../../public/assets/enamad.png'
+import kasboKar from '../../../public/assets/kasboKar.png'
+import samandehi from '../../../public/assets/samandehi.png'
 
 
 const Footer = () => {
