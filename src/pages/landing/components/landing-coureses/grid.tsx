@@ -32,7 +32,7 @@ export default function Grid() {
                     logo="bg-bootstrap"
                     position="bg-center"
                     needToContain={true}
-                />
+                    />
             </Link>
         </div>
         <div className="z-10 col-start-10 bg-[#FFC7F8] row-start-12 col-end-18 row-end-19">

@@ -12,7 +12,7 @@ export default function Courses() {
     const [posts, setPosts] = useState<Data[]>([]);
     const [loading, setLoading] = useState(false);
     const [itemsPerPage, setItemsPerPage] = useState(8);
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    // const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const getData = (datas: Data[]) => setPosts(datas);
     let wrapperRef = useRef(null);
     let refOfSearchBox: any;
@@ -37,39 +37,39 @@ export default function Courses() {
         refOfSearchBox = ref;
     };
 
-    useEffect(() => {
-        const fetchPosts = () => {
-            setLoading(true);
-            setPosts(data);
-            setLoading(false);
-        };
-        fetchPosts();
-
-        setItemsPerPage(
-            screenWidth >= 1024
-                ? 8
-                : screenWidth >= 768 && screenWidth < 1024
-                    ? 6
-                    : screenWidth > 460 && screenWidth < 768
-                        ? 4
-                        : 3
-        );
-
-        //sensitive item of cards to window width
-        const updateScreen = () => {
-            setScreenWidth(window.innerWidth);
-        };
-        window.addEventListener("resize", updateScreen);
-
-        //when click on page expect searchBox ,searchBox disappear
-        window.addEventListener("mousedown", handleClickOutside);
-
-        return () => {
-            window.removeEventListener("resize", updateScreen);
-            window.removeEventListener("mousedown", handleClickOutside);
-
-        };
-    }, [refOfSearchBox, screenWidth]);
+    // useEffect(() => {
+    //     const fetchPosts = () => {
+    //         setLoading(true);
+    //         setPosts(data);
+    //         setLoading(false);
+    //     };
+    //     fetchPosts();
+    //
+    //     setItemsPerPage(
+    //         screenWidth >= 1024
+    //             ? 8
+    //             : screenWidth >= 768 && screenWidth < 1024
+    //                 ? 6
+    //                 : screenWidth > 460 && screenWidth < 768
+    //                     ? 4
+    //                     : 3
+    //     );
+    //
+    //     //sensitive item of cards to window width
+    //     const updateScreen = () => {
+    //         setScreenWidth(window.innerWidth);
+    //     };
+    //     window.addEventListener("resize", updateScreen);
+    //
+    //     //when click on page expect searchBox ,searchBox disappear
+    //     window.addEventListener("mousedown", handleClickOutside);
+    //
+    //     return () => {
+    //         window.removeEventListener("resize", updateScreen);
+    //         window.removeEventListener("mousedown", handleClickOutside);
+    //
+    //     };
+    // }, [refOfSearchBox, screenWidth]);
 
     return (
         <div dir="ltr" ref={wrapperRef} onClick={handleClickOutside}>

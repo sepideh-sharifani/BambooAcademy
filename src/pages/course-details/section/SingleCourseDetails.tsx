@@ -1,19 +1,17 @@
 import React from "react";
 import {FaTrophy, FaBookOpen, FaChartLine} from "react-icons/fa";
-import {useParams} from "react-router-dom";
-import img3 from '../../courses/assets/img3.jpg'
-import img1 from '../../courses/assets/img1.jpg'
-import img2 from '../../courses/assets/img2.jpg'
-import img4 from '../../courses/assets/img4.jpg'
-import img5 from '../../courses/assets/img5.jpg'
-import img6 from '../../courses/assets/img6.jpg'
-import img7 from '../../courses/assets/img7.jpg'
-import img8 from '../../courses/assets/img8.jpg'
+import Image from 'next/image';
+import img3 from "../../../../public/courses-assets/img3.jpg";
+import img1 from "../../../../public/courses-assets/img1.jpg";
+import img2 from '../../../../public/courses-assets/img2.jpg';
+import img4 from '../../../../public/courses-assets/img4.jpg';
+import img5 from '../../../../public/courses-assets/img5.jpg';
+import img6 from '../../../../public/courses-assets/img6.jpg';
+import img7 from '../../../../public/courses-assets/img7.jpg';
+import img8 from '../../../../public/courses-assets/img8.jpg';
 import HeaderContentDetailsRoute from "./header-content-detail-route";
 
-const SingleCourseDetails = () => {
-
-    const {courseName} = useParams<{ courseName?: string }>();
+const SingleCourseDetails = ({courseName}) => {
 
     const courseData: { [index: string]: any } = {
         python: {
@@ -98,7 +96,7 @@ const SingleCourseDetails = () => {
                 </div>
                 <div className={'w-[560px] p-3 bg-[#f9f9f9]'} dir={'rtl'}>
                     <div className={'flex items-end py-2 border-b-2 border-[#004458]'}>
-                        <img
+                        <Image
                             src={courseName != undefined && courseData[courseName].imageSrc}
                             className={" h-[2rem] w-[2rem] ml-2"}
                             alt="logo"
@@ -196,8 +194,8 @@ const SingleCourseDetails = () => {
                     </div>
 
                 </div>
-                <img
-                    src={require("./../../../assets/courseOne.png")}
+                <Image
+                    src={require("./../../../../public/assets/courseOne.png")}
                     className={" h-[23rem] w-[22rem] ml-2 absolute"}
                     alt="logo"
                     width={"22rem"}

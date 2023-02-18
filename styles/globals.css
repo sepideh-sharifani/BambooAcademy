@@ -1,6 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*@tailwind base;*/
+/*@tailwind components;*/
+/*@tailwind utilities;*/
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+/*@import './base.css';*/
+@import 'tailwindcss/utilities';
 
 @import url('https://fonts.googleapis.com/css2?family=Lalezar&family=Oxygen+Mono&display=swap');
 @import url('https://v1.fontapi.ir/css/Yekan');

@@ -1,6 +1,6 @@
 import {useRef, useState} from "react";
 import {FaSearch} from "react-icons/fa";
-import {Link} from "react-router-dom";
+import Link from "next/Link";
 import {Data} from "../../DataInterface";
 
 interface ISearch {
@@ -65,7 +65,7 @@ const Search = ({data, getRefSearchBox}: ISearch) => {
                                         <Link
                                             key={key}
                                             className="w-full pr-3 max-h-[50px] min-h-[50px] flex items-center justify-end text-black hover:bg-zinc-300 transition hover:duration-100 "
-                                            to={`/courses/${value?.altName}`}
+                                            href={`/courses/${value?.altName}`}
                                             target="_self"
                                         >
                                             <p className="ml-2">{value.headerCard} </p>

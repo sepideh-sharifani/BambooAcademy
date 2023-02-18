@@ -1,6 +1,7 @@
 import {MouseEventHandler, useState} from "react";
-import {useNavigate} from "react-router-dom";
 import {Data} from "../../DataInterface";
+// @ts-ignore
+import Link from "next/link";
 
 interface ICard {
     card: Data;
@@ -11,13 +12,12 @@ interface ICard {
 
 function OneCard({card, imgsrc, onclick, loading}: ICard) {
     const [isHovering, setIsHovering] = useState(false);
-    const navigate = useNavigate();
     const params = {state: {...card}};
 
     if (loading) {
         return (
             <>
-                <div className="animate-spin"></div>
+                <div className="animate-spin"/>
                 <span className="">loading...</span>
             </>
         );
@@ -31,9 +31,6 @@ function OneCard({card, imgsrc, onclick, loading}: ICard) {
         setIsHovering(false);
     }
 
-    const handleChangingRoute = () => {
-        navigate(`/courses/${params?.state?.altName}`);
-    };
     return (
         <section
             className=" overflow-hidden w-full h-[25rem] xl:h-[27rem]  flex flex-col gap-2 min-w-0 bg-white shadow-md shadow-[#0000003c]"
@@ -65,7 +62,7 @@ function OneCard({card, imgsrc, onclick, loading}: ICard) {
                         </button>
                     </div>
                 </div>
-                <div className="w-4/5 h-[1.8px] bg-slate-400 mx-auto"></div>
+                <div className="w-4/5 h-[1.8px] bg-slate-400 mx-auto"/>
                 <p className="grow text-[#09B28B] xs:text-left"> تومان {card.price} </p>
             </div>
             {isHovering && (
@@ -73,9 +70,10 @@ function OneCard({card, imgsrc, onclick, loading}: ICard) {
                     className="animate-showingup self-center flex-none whitespace-nowrap mb-3
                  px-0.5 py-[0.4rem] pb-3 mx-auto text-[#004458] bg-[#DBDBDB] hover:text-white 
                  hover:bg-[#3E7788] transition hover:duration-150 hover:delay-150 "
-                    onClick={handleChangingRoute}
                 >
-                    مشاهده دوره
+                    <Link href={`/courses/${params?.state?.altName}`}>
+                        مشاهده دوره
+                    </Link>
                 </button>
             )}
         </section>

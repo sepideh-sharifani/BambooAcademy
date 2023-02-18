@@ -6,9 +6,9 @@ module.exports = {
         "./pages/**/*.{js,ts,jsx,tsx}",
     ],
     content: [
-      "./app/**/*.{js,ts,jsx,tsx}",
-      "./pages/**/*.{js,ts,jsx,tsx}",
-      "./src/**/*.{js,ts,jsx,tsx}",
+        "./app/**/*.{js,ts,jsx,tsx}",
+        "./pages/**/*.{js,ts,jsx,tsx}",
+        "./src/**/*.{js,ts,jsx,tsx}",
     ],
     plugins: [require("tailwind-scrollbar-hide")],
     theme: {

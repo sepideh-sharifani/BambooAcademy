@@ -46,7 +46,7 @@ function Cards({ currentPost, loading }: ICards) {
               <OneCard
                 key={post.id}
                 card={post}
-                imgsrc={require("../../assets/" + post.srcImage + ".jpg")}
+                imgsrc={require("../../../../../public/assets/" + post.srcImage + ".jpg")}
                 onclick={() => handleClickButton(post)}
                 loading={loading}
               />

@@ -1,5 +1,6 @@
 import {useState} from 'react'
-import registerImg from '../assets/register.png'
+// @ts-ignore
+import registerImg from '../../../../public/register-assets/register.png'
 import {
     AiOutlineInstagram,
     AiOutlineWhatsApp,
@@ -12,8 +13,9 @@ import {BiHomeSmile} from 'react-icons/bi'
 import {useForm, SubmitHandler} from 'react-hook-form'
 import * as Yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {useNavigate} from 'react-router';
-import {Link} from 'react-router-dom'
+// @ts-ignore
+import Link from "next/link";
+import Image from "next/image";
 
 interface Inputs {
     username: string,
@@ -49,7 +51,6 @@ export const RegisterPart = () => {
             .required("رمز عبور خود را تکرار کنید")
             .oneOf([Yup.ref("Password")], "رمز عبور ورودی مطابقت ندارد")
     });
-    const navigate = useNavigate()
     const [showCPassword, setShowCPassword] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
@@ -59,7 +60,7 @@ export const RegisterPart = () => {
     });
 
     const onSubmit: SubmitHandler<Inputs> = data => {
-        navigate("/register/login")
+        // navigate("/register/login")
         localStorage.setItem(`${data.email}`, JSON.stringify([data]));
     }
 
@@ -115,7 +116,7 @@ export const RegisterPart = () => {
                                     {showCPassword ? <AiOutlineEye/> : <AiOutlineEyeInvisible/>}
                                 </span>
                             </div>
-                            <Link to={'/register/login'}><span
+                            <Link href={'/register/login'}><span
                                 className='text-xs my-4'>حساب کاربری دارید؟ورود</span></Link>
                             <button type='submit' onSubmit={handleSubmit(onSubmit)}
                                     className='py-2 my-4 text-center text-white transition duration-100 border border-transparent rounded cursor-pointer bg-greenishBlue hover:bg-neutral-200 hover:text-black hover:border-greenishBlue'>ثبت
@@ -127,7 +128,7 @@ export const RegisterPart = () => {
                         <div className='absolute rounded-full bg-greenishBlue w-44 h-44 -right-52 top-56 md:hidden'/>
                     </div>
                     <div className='hidden w-full h-full md:block md:relative p-0 m-0'>
-                        <img className='animate-slideDown' src={registerImg} alt="register"/>
+                        <Image className='animate-slideDown' src={registerImg} alt="register"/>
                         <div
                             className='absolute divide-y divide-white top-1/3 left-1/2 -translate-x-2/4 -tranlate-y-2/4'>
                             <div className='mb-4 text-xl text-center text-white divide-y'>آکادمی آموزشی بامبو</div>
@@ -143,8 +144,10 @@ export const RegisterPart = () => {
                             </div>
                         </div>
                         <button className='absolute top-3/4 left-1/2 -translate-x-2/4'
-                                onClick={() => navigate('../../landing')}>
-                            <BiHomeSmile className='mx-4 mt-2 text-3xl text-white cursor-pointer top-2/4 left-2/4'/>
+                        >
+                            <Link href={'/'}>
+                                <BiHomeSmile className='mx-4 mt-2 text-3xl text-white cursor-pointer top-2/4 left-2/4'/>
+                            </Link>
                         </button>
                     </div>
                 </div>
