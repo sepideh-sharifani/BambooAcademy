@@ -96,6 +96,16 @@ export default function NavBar() {
                                 {`دوره‌ها`}
                             </li>
                         </Link>
+                        <Link href={"/dashboard/one"}>
+                            <li className={`text-white text-xl p-4`}>
+                                {`داشبورد one`}
+                            </li>
+                        </Link>
+                        <Link href={"/dashboard/two"}>
+                            <li className={`text-white text-xl p-4`}>
+                                {`داشبورد two`}
+                            </li>
+                        </Link>
                     </div>
                     <div className={``}>
                         <Link href={"/"}>

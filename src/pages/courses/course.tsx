@@ -11,7 +11,7 @@ export default function Courses() {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(1);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(typeof window !== "undefined" && window.innerWidth);
   const getData = (datas: any[]) => setPosts(datas);
   let wrapperRef = useRef(null);
   let refOfSearchBox: any;
