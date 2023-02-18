@@ -1,38 +1,27 @@
 import OneCard from "./OneCard";
-import { Data } from "../../DataInterface";
+// import { Data } from "../../DataInterface";
 import { useState, useRef } from "react";
-import Modal from "../Modal/Modal";
+import Modal from "../Modal";
 
 interface ICards {
-  currentPost: Array<Data>;
+  currentPost: Array<any>;
   loading: boolean;
 }
 //
 function Cards({ currentPost, loading }: ICards) {
   const [openModal, setOpenModal] = useState(false);
-  const [modalData, setModalData] = useState<Data>({
-    id: 1,
-    srcImage: "img5",
-    altName: "angular",
-    presenter: "فربد مهدوی",
-    capacity: "78",
-    headerCard: " angular دوره",
-    price: "600,000",
-    courseStatus: 95,
-    startDate: "1401/08/01",
-    endDate: "1401/12/01",
-  });
+  const [modalData, setModalData] = useState<any>({});
   const myref = useRef<HTMLDivElement | null>(null);
 
   function handleClickModal() {
     setOpenModal(false);
   }
 
-  function handleClickButton(post: Data) {
+  function handleClickButton(post: any) {
     setOpenModal(true);
     setModalData(post);
   }
-  
+
   return (
     <>
       <div>
@@ -44,9 +33,9 @@ function Cards({ currentPost, loading }: ICards) {
           {currentPost &&
             currentPost.map((post) => (
               <OneCard
-                key={post.id}
+                key={post._id}
                 card={post}
-                imgsrc={require("../../../../../public/assets/" + post.srcImage + ".jpg")}
+                imgsrc={post.lesson.image}
                 onclick={() => handleClickButton(post)}
                 loading={loading}
               />
