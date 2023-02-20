@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
+import DatePicker from "react-multi-date-picker"
 // @ts-ignore
 import registerImg from '../../../../public/register-assets/register.png'
 import { Input } from '../component/base/Input'
@@ -46,6 +47,9 @@ export const RegisterPart: React.FunctionComponent = () => {
     const [id, setId] = useState('');
     const [validId, setValidId] = useState(false);
     const [idFocus, setIdFocus] = useState(false);
+
+    const [date, setDate] = useState('');
+    const [dateFocus, setDateFocus] = useState(false);
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -150,7 +154,6 @@ export const RegisterPart: React.FunctionComponent = () => {
                                     <Input
                                         title='لطفا شماره موبایل خود را وارد کنید'
                                         type="number"
-                                        dir='ltr'
                                         onChange={(e) => setMobile(e.target.value)}
                                         required
                                         onFocus={() => setMobileFocus(true)}
@@ -169,6 +172,13 @@ export const RegisterPart: React.FunctionComponent = () => {
                                         variant='Primary'
                                         placeholder='شماره ملی*:' />
                                     <p className={idFocus && id && !validId ? "text-red-900 font-semibold text-xs" : "hidden"}>کد ملی معنبر وارد کنید</p>
+                                    <DatePicker
+                                        onChange={(e) => setDate(e.target.value)}
+                                        onFocus={() => setDateFocus(true)}
+                                        onBlur={() => setDateFocus(false)}
+                                        variant='Primary'
+                                        placeholder='تاریخ تولد'
+                                    />
                                     {/* password, icon , validate */}
                                     <div className="relative">
                                         <Input dir='ltr' type={showPassword ? "text" : "password"}
