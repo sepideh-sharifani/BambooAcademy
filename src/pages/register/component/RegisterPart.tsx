@@ -23,6 +23,7 @@ const USER_REGEX = /^[\u0600-\u06FF\s][\u0600-\u06FF\s0-9-_]{3,24}$|^[A-z][A-z0-
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const MOBILE_REGEX = /^(?:0|98|\+98|\+980|0098|098|00980)?(9\d{9})$/;
+const ID_REGEX = /^(?!(\d)\1{9})\d{10}$/;
 
 export const RegisterPart: React.FunctionComponent = () => {
     //using refrence for user input that allows us to set the focus on user input when the component loads
@@ -41,6 +42,10 @@ export const RegisterPart: React.FunctionComponent = () => {
     const [mobile, setMobile] = useState('');
     const [validMobile, setValidMobile] = useState(false);
     const [mobileFocus, setMobileFocus] = useState(false);
+
+    const [id, setId] = useState('');
+    const [validId, setValidId] = useState(false);
+    const [idFocus, setIdFocus] = useState(false);
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -74,6 +79,11 @@ export const RegisterPart: React.FunctionComponent = () => {
     }, [mobile])
 
     useEffect(() => {
+        const result = ID_REGEX.test(id);
+        setValidId(result);
+    }, [id])
+
+    useEffect(() => {
         const result = PWD_REGEX.test(pwd);
         setValidPwd(result);
         const match = pwd === matchPwd;
@@ -82,7 +92,7 @@ export const RegisterPart: React.FunctionComponent = () => {
 
     useEffect(() => {
         setErrMsg('');
-    }, [user, pwd, matchPwd])
+    }, [user, pwd, matchPwd, mobile, email, id])
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -149,11 +159,16 @@ export const RegisterPart: React.FunctionComponent = () => {
                                         placeholder='شماره موبایل*:' />
                                     <p className={mobileFocus && mobile && !validMobile ? "text-red-900 font-semibold text-xs" : "hidden"}>شماره موبایل معنبر وارد کنید</p>
                                     {/* Identification Number validation */}
-                                    {/* <Input type="number" {...register("ID", { required: true })}
-                                variant='Primary'
-                                placeholder='شماره ملی*:' />
-                            <p className="text-xs text-red-700">{errors.ID?.message?.toString()}</p> */}
-
+                                    <Input
+                                        title='لطفا کد ملی خود را وارد کنید'
+                                        type="number"
+                                        onChange={(e) => setId(e.target.value)}
+                                        required
+                                        onFocus={() => setIdFocus(true)}
+                                        onBlur={() => setIdFocus(false)}
+                                        variant='Primary'
+                                        placeholder='شماره ملی*:' />
+                                    <p className={idFocus && id && !validId ? "text-red-900 font-semibold text-xs" : "hidden"}>کد ملی معنبر وارد کنید</p>
                                     {/* password, icon , validate */}
                                     <div className="relative">
                                         <Input dir='ltr' type={showPassword ? "text" : "password"}
