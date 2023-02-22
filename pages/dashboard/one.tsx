@@ -1,3 +1,5 @@
+import React from "react"
+
 const one = () => {
     return <h1>one</h1>
 }

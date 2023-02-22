@@ -1,15 +1,15 @@
 import NavHeader from "./NavHeader";
 import NavBody from "./NavBody";
-// import { Data } from "../../DataInterface";
+import { courseDataType } from "../../@types/api.type";
 interface INav {
-  getData: (datas: any[]) => void;
-  cardData:any
+  getData: (datas: courseDataType[]) => void;
+  cardData:courseDataType[]
 }
 function Nav({ getData,cardData }: INav) {
   return (
     <div className=" font-Lalezar flex flex-col sm:flex-row-reverse sm:justify-between sm:h-15 mb-10">
       <NavHeader />
-      <NavBody getData={getData} cardData/>
+      <NavBody getData={getData} cardData ={cardData}/>
     </div>
   );
 }

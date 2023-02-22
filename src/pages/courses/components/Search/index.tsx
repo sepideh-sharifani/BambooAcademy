@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import Link from "next/link"
-// import {Data} from "../../DataInterface";
+import Link from "next/Link"
+import { courseDataType } from "../../@types/api.type";
 
 interface ISearch {
-  data: any[];
+  data: courseDataType[];
   getRefSearchBox: (ref: any) => any;
 }
 
@@ -21,7 +21,7 @@ const Search = ({ data, getRefSearchBox }: ISearch) => {
     const searchWord = event.target.value;
     setWordEntered(searchWord);
     const newFilter = [...data].filter((value) => {
-      return value.title.toLowerCase().includes(searchWord.toLowerCase());
+      return value.title.toLowerCase().includes(searchWord?.toLowerCase());
     });
     if (searchWord === "") {
       setFilteredData([]);

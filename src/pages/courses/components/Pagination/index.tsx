@@ -1,5 +1,3 @@
-import { number } from "yup";
-
 interface IPaginate {
   postsPerPage: number;
   totalPosts: number;

@@ -21,6 +21,7 @@ module.exports = {
             screens: {
                 xs: "550px",
                 xxs: "460px",
+                md: "700px"
             },
             width: {
                 100: "50rem",
@@ -173,5 +174,8 @@ module.exports = {
                 21: "21",
             },
         },
+        boxShadow:{
+            'all':' 10px 4px 25px 1px rgba(0, 0, 0, 0.25)'
+        }
     },
 };
