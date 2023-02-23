@@ -26,13 +26,13 @@ const EditCreateModal = ({
     console.log(data); //data ro bayad pass bedim;
     const token = localStorage.getItem('user_Data');
     if (token && token.length) {
-    reqToServer = ()=>{
+    reqToServer =async ()=>{
       const config = {
         headers:{Aythorization:`Bearer${token}`}
       }
       if(data){
         const bodyParams = {key:data}
-      const res = AXIOS.post(ApiRoutes.CreateCourse,bodyParams,config)
+      const res = await AXIOS.post(ApiRoutes.CreateCourse,bodyParams,config)
       res.then(res=>{
         console.log(res.data)
         if(res.status ==200)
@@ -42,7 +42,7 @@ const EditCreateModal = ({
       
     }else if(data === null || data === undefined){
       const bodyParams = {key:data}
-      const res = AXIOS.put(ApiRoutes.CreateCourse,bodyParams,config)
+      const res =await AXIOS.put(ApiRoutes.CreateCourse,bodyParams,config)
       res.then(res=>{
         console.log(res.data)
         if(res.status ==200)
