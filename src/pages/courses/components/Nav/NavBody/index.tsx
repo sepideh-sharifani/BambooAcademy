@@ -1,4 +1,4 @@
-import Link from "next/Link";
+import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { courseDataType } from "../../../@types/api.type";
 import { AppContext } from "../../../context/store";
@@ -42,8 +42,9 @@ function NavBody({ getData, cardData }: INavBody) {
             b.startDate
               .slice(0,10)
               .split("-")
+              .reverse()
               .join()
-              .localeCompare(a.startDate.slice(0,10).split("-").join())
+              .localeCompare(a.startDate.slice(0,10).split("-").reverse().join())
           )
         );
         break;

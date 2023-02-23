@@ -11,8 +11,9 @@ export const navSearchCourseReducer = (state: courseContextStateType[], action: 
         b.startDate
           .slice(0, 10)
           .split("-")
+          .reverse()
           .join()
-          .localeCompare(a.startDate.slice(0, 10).split("-").join())
+          .localeCompare(a.startDate.slice(0, 10).split("-").reverse().join())
       );
       return state;
     case "EXPENSIVE_COURSE":

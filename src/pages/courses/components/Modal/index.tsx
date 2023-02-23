@@ -1,4 +1,4 @@
-import Link from "next/Link";
+import Link from "next/link";
 import { courseDataType } from "../../@types/api.type";
 
 interface IModal {

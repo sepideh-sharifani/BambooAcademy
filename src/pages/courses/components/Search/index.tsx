@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import Link from "next/Link"
+import Link from "next/link"
 import { courseDataType } from "../../@types/api.type";
 
 interface ISearch {
