@@ -69,7 +69,6 @@ function Cards({ currentPost, loading }: ICards) {
         <Modal
           open={openModal}
           modal={modalData}
-          onclick={handleClickModal}
           onclose={() => setOpenModal(false)}
         />
       </div>

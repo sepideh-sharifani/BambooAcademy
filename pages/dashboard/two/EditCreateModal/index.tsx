@@ -21,8 +21,41 @@ const EditCreateModal = ({
     reset,
     formState: { errors },
   } = useForm<courseContextStateType>();
-  const onSubmit: SubmitHandler<courseContextStateType> = (data) =>
+  let reqToServer
+  const onSubmit: SubmitHandler<courseContextStateType> = (data) =>{
     console.log(data); //data ro bayad pass bedim;
+    const token = localStorage.getItem('user_Data');
+    if (token && token.length) {
+    reqToServer = ()=>{
+      const config = {
+        headers:{Aythorization:`Bearer${token}`}
+      }
+      if(data){
+        const bodyParams = {key:data}
+      const res = AXIOS.post(ApiRoutes.CreateCourse,bodyParams,config)
+      res.then(res=>{
+        console.log(res.data)
+        if(res.status ==200)
+        {alert("با موفقیت ثبت شد")}
+        else alert("دوباره امتخان کنید")
+      })
+      
+    }else if(data === null || data === undefined){
+      const bodyParams = {key:data}
+      const res = AXIOS.put(ApiRoutes.CreateCourse,bodyParams,config)
+      res.then(res=>{
+        console.log(res.data)
+        if(res.status ==200)
+        {alert("با موفقیت ثبت شد")}
+        else alert("دوباره امتخان کنید")
+      })
+    }
+    
+    }}
+  }
+  useEffect(()=>{
+    reqToServer()
+  },[])
 
   const [teacherNameId, setTeacherNameId] = useState([
     { teacherName: "ahmad1377", teacherId: "63ed4eb332509560c4bcd6b3" },

@@ -4,11 +4,10 @@ import { courseDataType } from "../../@types/api.type";
 interface IModal {
   modal: courseDataType;
   open: boolean;
-  onclick: () => void;
   onclose: () => void;
 }
 
-function Modal({ open, modal, onclick, onclose }: IModal) {
+function Modal({ open, modal, onclose }: IModal) {
   const params = { state: { ...modal } };
   if (!open) return null;
 
@@ -16,7 +15,7 @@ function Modal({ open, modal, onclick, onclose }: IModal) {
     <div>
       <div
         className="bg-[#00000081] fixed top-0 left-0 right-0 bottom-0 animate-showingup"
-        onClick={onclick}
+        onClick={onclose}
       />
       <div
         className="animate-showingup sm:tracking-wider font-Lalezar z-100 text-[#3E7788] h-full
