@@ -27,7 +27,6 @@ class MyDocument extends Document {
 						name='theme-color'
 						content={'#1e6f5c'}
 					/>
-					<title>آکادمی بامبو</title>
 					<link
 						rel='icon'
 						href='/favicon.ico'

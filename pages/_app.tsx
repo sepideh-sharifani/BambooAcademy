@@ -1,11 +1,17 @@
-import type {AppProps} from 'next/app'
+import type { AppProps } from 'next/app'
+import Head from 'next/head';
 import Header from "../src/components/header";
 import '../styles/globals.css'
 
-export default function MyApp({Component, pageProps}: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps) {
     return (
-        <Header>
-            <Component {...pageProps} />
-        </Header>
+        <>
+            <Head>
+                <title>آکادمی بامبو</title>
+            </Head>
+            <Header>
+                <Component {...pageProps} />
+            </Header>
+        </>
     )
 }

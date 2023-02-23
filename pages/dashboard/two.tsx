@@ -1,5 +1,9 @@
+import Lessons from '../../src/pages/Dashboard/admin/Lessons/Index'
+
 const two = () => {
-    return <h1>two</h1>
+    return (<>two
+    </>
+    )
 }
 
 export default two

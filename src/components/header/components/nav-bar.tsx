@@ -1,24 +1,33 @@
-import {useEffect, useState, useCallback} from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 import Link from "next/Link"
+import { Router, useRouter } from "next/router";
+
+type UserData = {
+    fullName: string,
+}[]
 
 export default function NavBar() {
-    const [logindata, setLoginData] = useState([]);
+    const [logindata, setLoginData] = useState<UserData>([]);
+    const { fullName }: any = logindata;
 
 
     const loginUser = () => {
-        const getuser = localStorage.getItem("user_login");
+        const getuser = localStorage.getItem('user_Data');
         if (getuser && getuser.length) {
-            const user = JSON.parse(getuser);
-            setLoginData(user);
+            const user = JSON.parse(getuser)
+            setLoginData(user)
         }
     }
+    console.log(logindata)
+
 
     useEffect(() => {
         loginUser();
     }, [])
 
     const userlogout = () => {
-        localStorage.removeItem("user_login")
+        localStorage.clear();
+        window.location.reload();
         // navigate("/");
     }
 
@@ -33,8 +42,8 @@ export default function NavBar() {
             if (!showBurger) return;
             else if (event.target.classList.contains("nav-btn")) {
                 event.target.dataset.route &&
-                // navigate(`./..${event.target.dataset.route}`);
-                setShowBurger(false);
+                    // navigate(`./..${event.target.dataset.route}`);
+                    setShowBurger(false);
             } else setShowBurger(false);
         };
 
@@ -44,7 +53,7 @@ export default function NavBar() {
             document.body.removeEventListener("click", bodyHandler);
         };
     }, [showBurger]);
-//navigate
+    //navigate
     const clickHandler = useCallback((event: any) => {
         event.stopPropagation();
         if (window.innerWidth > 650) return;
@@ -54,7 +63,7 @@ export default function NavBar() {
     return (
         <nav
             className={` ${!showBurger ? "border-b-[#D1D1D1] border-b-[1px]" : ""
-            } w-full xl:max-w-[90%] m-auto fixed top-0 left-1/2 -translate-x-1/2 z-20 h-[4rem]`}
+                } w-full xl:max-w-[90%] m-auto fixed top-0 left-1/2 -translate-x-1/2 z-20 h-[4rem]`}
         >
             {!showBurger ? (
                 <ul
@@ -74,11 +83,12 @@ export default function NavBar() {
                     </div>) : (
                         <div className={` flex`}>
                             <li className={`text-white text-xl p-4`}>
-                                <button className="bg-black" onClick={userlogout}>خروج</button>
+                                <p>{fullName} خوش آمدید</p>
                             </li>
                             <li className={`text-white text-xl p-4`}>
-                                خوش آمدید
+                                <button onClick={userlogout}>خروج</button>
                             </li>
+
                         </div>)}
 
                     <div className={` flex max-[650px]:hidden`}>
@@ -109,15 +119,15 @@ export default function NavBar() {
                     </div>
                     <div className={``}>
                         <Link href={"/"}>
-                        <li className={`text-white text-xl p-4`}>
-                            <button onClick={clickHandler} className={`flex`}>
+                            <li className={`text-white text-xl p-4`}>
+                                <button onClick={clickHandler} className={`flex`}>
 
                                     <span>{"بامبو"}</span>
                                     <div
                                         className={`bg-bamboIcon bg-no-repeat bg-contain h-5 bg-center w-5 self-center`}
                                     />
-                            </button>
-                        </li>
+                                </button>
+                            </li>
                         </Link>
                     </div>
                 </ul>

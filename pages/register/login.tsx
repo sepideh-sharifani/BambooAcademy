@@ -1,7 +1,7 @@
-import {Login} from "../../src/pages/register/component/Login";
+import Login from "../../src/pages/register/component/Login";
 
 const login = () => {
-    return <Login/>
+    return <Login />
 }
 
-export default login
+export default login;
