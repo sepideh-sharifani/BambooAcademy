@@ -1,8 +1,9 @@
 import {MouseEventHandler, useState} from "react";
 import Link from 'next/link'
+import { courseDataType } from "../../../@types/api.type";
 
 interface ICard {
-    card: any;
+    card: courseDataType;
     onclick: MouseEventHandler<HTMLButtonElement> | undefined;
     imgsrc: string;
     loading: boolean;
@@ -18,7 +19,7 @@ function OneCard({card, imgsrc, onclick, loading}: ICard) {
                 <span className="p-0 m-0">loading</span>
                 <div role="status">
                     <svg
-                        className="w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                        className="w-5 h-5 text-gray-200 animate-spin fill-blue-600"
                         viewBox="0 0 100 101"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -52,10 +53,10 @@ function OneCard({card, imgsrc, onclick, loading}: ICard) {
             onMouseOut={handleMouseOut}
         >
             <div
-                className={`max-h-56 w-full shrink group-hover:-translate-y-10 duration-300`}
+                className={`max-h-56 h-full w-full shrink group-hover:-translate-y-10 duration-300`}
             >
                 <img
-                    className="bg-slate-300 object-cover h-full w-full"
+                    className="bg-slate-300 object-fill h-full w-full"
                     src={imgsrc}
                     alt={card.title}
                 />
@@ -68,14 +69,14 @@ function OneCard({card, imgsrc, onclick, loading}: ICard) {
                     {card.lesson.lessonName}
                 </h1>
                 <p className="grow text-[#3E7788] text-sm ">
-                    {card.teacher.fullName} : مدرس
+                    مدرس : {card.teacher.fullName}
                 </p>
                 <div className="grow gap-2 xs:gap-0 flex xs:flex-row-reverse justify-between flex-col text-sm">
                     <p className="text-[#3E7788] ">ظرفیت : {card.capacity} نفر</p>
                     <div className="w-1/3 m-auto xs:m-0">
                         <button
                             className="rounded-md text-white bg-[#004458] hover:bg-[#025b76] py-1 px-3 pb-2 transition
-               hover:duration-150 hover:delay-150 shadow-md shadow-slate-400"
+                                hover:duration-150 hover:delay-150 shadow-md shadow-slate-400"
                             onClick={onclick}
                         >
                             جزئیات
@@ -89,9 +90,9 @@ function OneCard({card, imgsrc, onclick, loading}: ICard) {
             <button
                 className={`self-center absolute -bottom-2 whitespace-nowrap mb-3
                 rounded-md px-1.5 py-[0.4rem] pb-3 mx-auto text-[#004458] bg-[#DBDBDB] hover:text-white 
-                 hover:bg-[#3E7788] group-hover:-translate-y-5 translate-y-16 duration-500 shadow-lg shadow-slate-200`}
+                 hover:bg-[#3E7788] group-hover:-translate-y-1 translate-y-16 duration-500 shadow-lg shadow-slate-200`}
             >
-                <Link href={`/courses/${params?.state?.altName}`}>
+                <Link href={`/courses/${params?.state?.title}`}>
                     مشاهده دوره
                 </Link>
             </button>

@@ -1,7 +1,7 @@
 import OneCard from "./OneCard";
-// import { Data } from "../../DataInterface";
 import { useState, useRef } from "react";
 import Modal from "../Modal";
+import { courseDataType } from "../../@types/api.type";
 
 interface ICards {
   currentPost: Array<any>;
@@ -10,7 +10,30 @@ interface ICards {
 //
 function Cards({ currentPost, loading }: ICards) {
   const [openModal, setOpenModal] = useState(false);
-  const [modalData, setModalData] = useState<any>({});
+  const [modalData, setModalData] = useState<courseDataType>({
+    teacher: {
+      _id: "",
+      fullName: "",
+      email: "",
+      profile: "",
+    },
+    lesson: {
+      topics: [],
+      _id: "",
+      lessonName: "",
+      description: "",
+      image: "",
+    },
+    _id: "",
+    title: "",
+    cost: 0,
+    endDate: "",
+    startDate: "",
+    capacity: 0,
+    students: [],
+    __v: 0,
+  });
+
   const myref = useRef<HTMLDivElement | null>(null);
 
   function handleClickModal() {
@@ -46,7 +69,6 @@ function Cards({ currentPost, loading }: ICards) {
         <Modal
           open={openModal}
           modal={modalData}
-          onclick={handleClickModal}
           onclose={() => setOpenModal(false)}
         />
       </div>

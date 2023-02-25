@@ -1,18 +1,20 @@
 import { useEffect, useRef, useState } from "react";
-// import {Data} from "./DataInterface";
 import Search from "./components/Search";
 import Nav from "./components/Nav";
 import Paginate from "./components/Pagination";
 import Cards from "./components/Cards";
-import axios from "axios";
+import { AXIOS } from "./config/axios.config";
+import { ApiRoutes } from "./constants/api.config";
+import { courseDataType } from "./@types/api.type";
+import { AppContext, AppContextProvider } from "./context/store";
 
 export default function Courses() {
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<courseDataType[]>([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(1);
   const [screenWidth, setScreenWidth] = useState(typeof window !== "undefined" && window.innerWidth);
-  const getData = (datas: any[]) => setPosts(datas);
+  const getData = (datas: courseDataType[]) => setPosts(datas);
   let wrapperRef = useRef(null);
   let refOfSearchBox: any;
 
@@ -48,27 +50,24 @@ export default function Courses() {
     refOfSearchBox = ref;
   };
 
-  const dataCards = axios.create({
-    baseURL: "http://localhost:5000/",
-  });
 
   const fetchPosts = async () => {
     setLoading(true);
-    let response = await dataCards.get("api/course/getall");
-    setPosts(response.data.result);
-    setLoading(false);
+    let response = await AXIOS.get(ApiRoutes.GetAllCourses);
+    if (response.status == 200){
+      setPosts(response.data.result);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     fetchPosts();
-
-    console.log(posts.length >= 8);
     setItemsPerPage(
-      screenWidth >= 1024 && posts.length < 8
+      screenWidth >= 1024 
         ? 8
-        : posts.length >= 6 && screenWidth >= 768 && screenWidth < 1024
+        : screenWidth >= 768 && screenWidth < 1024
         ? 6
-        : screenWidth > 460 && screenWidth < 768 && posts.length >= 4
+        : screenWidth > 460 && screenWidth < 768 
         ? 4
         : 3
     );
@@ -89,6 +88,7 @@ export default function Courses() {
   }, [refOfSearchBox, screenWidth]);
 
   return (
+    // <AppContextProvider>
     <div dir="ltr" ref={wrapperRef}>
       <div className="w-full xl:max-w-[100%] h-[7rem]">
         <div className="h-[7rem] bg-coursesHeader">
@@ -109,5 +109,6 @@ export default function Courses() {
         />
       </main>
     </div>
+    // </AppContextProvider>
   );
 }
