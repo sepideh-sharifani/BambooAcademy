@@ -77,7 +77,7 @@ const two = () => {
                     <th scope="col" className="px-0.5 md:px-6">
                       <span className="inline-flex items-center">
                         عنوان
-                        <BsArrowDown />
+                        <BsArrowDown className="" />
                       </span>
                     </th>
                     <th scope="col" className="px-0.5 md:px-6">
@@ -111,7 +111,7 @@ const two = () => {
                       <EditCreateModal
                         openModal={popupEditCreateModal}
                         onClose={() => setPopupEditCreateModal(false)}
-                      />{" "}
+                      />
                     </th>
                   </tr>
                 </thead>

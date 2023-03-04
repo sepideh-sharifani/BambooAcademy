@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { courseContextStateType } from "../../../../src/pages/courses/@types/context/context.type";
 import { AXIOS } from "../../../../src/pages/courses/config/axios.config";
@@ -10,52 +10,18 @@ interface IEditCreateModal {
   onClose: () => void;
   data?: courseContextStateType | undefined;
 }
-const EditCreateModal = ({
-  openModal,
-  onClose,
-  data,
-}: IEditCreateModal) => {
+const EditCreateModal = ({ openModal, onClose, data }: IEditCreateModal) => {
+  const [dataForReq, setDataForReq] = useState<courseContextStateType>();
+  const haveData = data ? true:false
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<courseContextStateType>();
-  let reqToServer
-  const onSubmit: SubmitHandler<courseContextStateType> = (data) =>{
+  const onSubmit: SubmitHandler<courseContextStateType> = (data) => {
+    setDataForReq(data);
     console.log(data); //data ro bayad pass bedim;
-    const token = localStorage.getItem('user_Data');
-    if (token && token.length) {
-    reqToServer =async ()=>{
-      const config = {
-        headers:{Aythorization:`Bearer${token}`}
-      }
-      if(data){
-        const bodyParams = {key:data}
-      const res = await AXIOS.post(ApiRoutes.CreateCourse,bodyParams,config)
-      res.then(res=>{
-        console.log(res.data)
-        if(res.status ==200)
-        {alert("با موفقیت ثبت شد")}
-        else alert("دوباره امتخان کنید")
-      })
-      
-    }else if(data === null || data === undefined){
-      const bodyParams = {key:data}
-      const res =await AXIOS.put(ApiRoutes.CreateCourse,bodyParams,config)
-      res.then(res=>{
-        console.log(res.data)
-        if(res.status ==200)
-        {alert("با موفقیت ثبت شد")}
-        else alert("دوباره امتخان کنید")
-      })
-    }
-    
-    }}
-  }
-  useEffect(()=>{
-    reqToServer()
-  },[])
+  };
 
   const [teacherNameId, setTeacherNameId] = useState([
     { teacherName: "ahmad1377", teacherId: "63ed4eb332509560c4bcd6b3" },
@@ -65,10 +31,7 @@ const EditCreateModal = ({
   ]);
   const [message, setMessage] = useState("");
 
-  const handleChange = (event) => {
-    let result = event.target.value.replace(/[^a-z][^\u0600-\u06FF\s]+$/gi, "");
-    setMessage(result);
-  };
+  //get all teacher exist for modal
   const getAllTeacher = useCallback(async () => {
     const response = await AXIOS.get(ApiRoutes.GetAllTeacher);
     if (response.status == 200) {
@@ -80,6 +43,7 @@ const EditCreateModal = ({
     }
   }, []);
 
+  //get all lesson for modal
   const getAlllesson = useCallback(async () => {
     const response = await AXIOS.get(ApiRoutes.GetAllLesson);
     if (response.status == 200) {
@@ -91,9 +55,53 @@ const EditCreateModal = ({
       );
     }
   }, []);
+
+  //edit or create data with request to server
+  const reqToServer = useCallback(async () => {
+    localStorage.setItem("token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y3M2ZhMWIwY2FmODFmZTBhMTQwZjIiLCJyb2xlIjoidGVhY2hlciIsImlhdCI6MTY3NzE0ODI2NX0.Rop_MiIddqlosVK8f__DWTrtNt-w5MHILjWDlqeUPDg")
+    const token = localStorage.getItem("token");
+    console.log(token)
+    if (token && token.length) {
+      const config = {
+        headers: { "x-auth-token":token,"Content-Type":"application/json"}
+      }
+  
+      if (haveData) {
+        const bodyParams = { key: dataForReq };
+        const res = await AXIOS.post(
+          ApiRoutes.CreateCourse,
+          bodyParams,
+          config
+        );
+        if (res.status == 200) {
+          console.log(res.data);
+          alert("با موفقیت ثبت شد");
+        } else alert("دوباره امتخان کنید");
+      } else {
+        const bodyParams = { key: dataForReq };
+        const res = await AXIOS.put(
+          ApiRoutes.CreateCourse,
+          bodyParams,
+          config
+        );
+        console.log(res.data);
+        if (res.status == 200) {
+          alert("با موفقیت ثبت شد");
+        } else alert("دوباره امتخان کنید");
+      }
+    }
+  },[])
+  
+  const handleChange = (event: any) => {
+    let result = event.target.value.replace(/[^a-z][^\u0600-\u06FF\s]+$/gi, "");
+    setMessage(result);
+  };
+
   useEffect(() => {
+    if(openModal){
     getAllTeacher();
     getAlllesson();
+    reqToServer();}
   }, []);
 
   return (
@@ -112,7 +120,7 @@ const EditCreateModal = ({
               type="button"
               className="absolute top-3 left-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
             >
-              <AiOutlineClose  />
+              <AiOutlineClose />
             </button>
             <div className="p-6 mb-6">
               <div className="flex justify-start pb-6 text-2xl font-medium text-gray-600">
@@ -134,10 +142,14 @@ const EditCreateModal = ({
                       id="title"
                       className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-[#0b7a9caf] border-indigo-[#0b7a9caf] focus:border-4 outline-none focus:border-[#0b7a9c5d] block w-full p-2.5"
                       placeholder="ReactJs"
-                      value={data?data.title:message}
+                      value={data ? data.title : message}
                       onChange={handleChange}
                     />
-                  {errors.title?.type && <p className="text-xs text-red-600">این فیلد الزامی است</p>}
+                    {errors.title?.type && (
+                      <p className="text-xs text-red-600">
+                        این فیلد الزامی است
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label
@@ -149,17 +161,21 @@ const EditCreateModal = ({
                     </label>
                     <input
                       {...register("cost", { required: true })}
-                      value={data?data.cost:""}
+                      value={data ? data.cost : ""}
                       type="number"
-                      min={'10000'}
-                      max={'5000000'}
+                      min={"10000"}
+                      max={"5000000"}
                       id="cost"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0b7a9caf] border-indigo-[#0b7a9caf] focus:border-4 outline-none focus:border-[#0b7a9c5d] block w-full p-2.5"
                       placeholder="100000"
                     />
-                   {errors.cost?.type && <p className="text-xs text-red-600">این فیلد الزامی است</p>}
+                    {errors.cost?.type && (
+                      <p className="text-xs text-red-600">
+                        این فیلد الزامی است
+                      </p>
+                    )}
                   </div>
-                  <div >
+                  <div>
                     <label
                       htmlFor="capacity"
                       className="block mb-2 text-sm font-medium text-gray-500"
@@ -169,7 +185,7 @@ const EditCreateModal = ({
                     </label>
                     <input
                       {...register("capacity", { required: true })}
-                      value={data?data.capacity:""}
+                      value={data ? data.capacity : ""}
                       type="number"
                       max={100}
                       min={1}
@@ -177,7 +193,11 @@ const EditCreateModal = ({
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0b7a9caf] border-indigo-[#0b7a9caf] focus:border-4 outline-none focus:border-[#0b7a9c5d] block w-full p-2.5"
                       placeholder="5 نفر"
                     />
-                  {errors.capacity?.type && <p className="text-xs text-red-600">این فیلد الزامی است</p>}
+                    {errors.capacity?.type && (
+                      <p className="text-xs text-red-600">
+                        این فیلد الزامی است
+                      </p>
+                    )}
                   </div>
                   <div className="col-span-2">
                     <label
@@ -189,14 +209,18 @@ const EditCreateModal = ({
                     </label>
                     <input
                       {...register("startDate", { required: true })}
-                      value={data?data.startDate.slice(0,10):""}
+                      value={data ? data.startDate.slice(0, 10) : ""}
                       type="date"
                       id="startdate"
                       min={"2023-1-1"}
                       max={"2026-12-12"}
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0b7a9caf] border-indigo-[#0b7a9caf] focus:border-4 outline-none focus:border-[#0b7a9c5d] block w-full p-2.5"
                     />
-                  {errors.startDate?.type && <p className="text-xs text-red-600">این فیلد الزامی است</p>}
+                    {errors.startDate?.type && (
+                      <p className="text-xs text-red-600">
+                        این فیلد الزامی است
+                      </p>
+                    )}
                   </div>
                   <div className="col-span-2">
                     <label
@@ -208,14 +232,18 @@ const EditCreateModal = ({
                     </label>
                     <input
                       {...register("endDate", { required: true })}
-                      value={data?data.endDate.slice(0,10):""}
+                      value={data ? data.endDate.slice(0, 10) : ""}
                       type="date"
                       id="enddate"
                       min={"2023-1-1"}
                       max={"2026-12-12"}
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0b7a9caf] border-indigo-[#0b7a9caf] focus:border-4 outline-none focus:border-[#0b7a9c5d] block w-full p-2.5"
                     />
-                  {errors.endDate?.type && <p className="text-xs text-red-600">این فیلد الزامی است</p>}
+                    {errors.endDate?.type && (
+                      <p className="text-xs text-red-600">
+                        این فیلد الزامی است
+                      </p>
+                    )}
                   </div>
                   <div className="col-span-2">
                     <label
@@ -227,7 +255,7 @@ const EditCreateModal = ({
                     </label>
                     <select
                       {...register("teacherId", { required: true })}
-                      value={data?data.teacherName:""}
+                      value={data ? data.teacherName : ""}
                       id="teacher"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0b7a9caf] border-indigo-[#0b7a9caf] focus:border-4 outline-none focus:border-[#0b7a9c5d] block w-full p-2.5"
                     >
@@ -248,12 +276,14 @@ const EditCreateModal = ({
                     </label>
                     <select
                       {...register("lessonId", { required: true })}
-                      value={data?data.lessonName:""}
+                      value={data ? data.lessonName : ""}
                       id="lesson"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#0b7a9caf] border-indigo-[#0b7a9caf] focus:border-4 outline-none focus:border-[#0b7a9c5d] block w-full p-2.5"
                     >
                       {lessonNameId.map((item) => (
-                        <option key={item.lessonId} value={item.lessonId}>{item.lessonName}</option>
+                        <option key={item.lessonId} value={item.lessonId}>
+                          {item.lessonName}
+                        </option>
                       ))}
                     </select>
                     <p className="text-[#0b7a9caf] text-xs flex justify-start font-medium">
@@ -271,7 +301,7 @@ const EditCreateModal = ({
                   </button>
                   <button
                     type="button"
-                    onClick={()=>onClose()}
+                    onClick={() => onClose()}
                     className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 "
                   >
                     لغو

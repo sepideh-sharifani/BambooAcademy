@@ -12,13 +12,19 @@ interface IDeleteModal {
 }
 const DeleteModal = ({ openModal, onClose, data }: IDeleteModal) => {
   const [openAlert,setOpenAlert]=useState(false)
-  let callDeleteFunction = false 
+  const [callDeleteFunction,setCallDeleteFunction] =useState(false) 
   const deleteCourse = async () => {
-    console.log(data.courseId)
+    
+    const config = {
+      headers: { "x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2U5MWJkZWE3M2FjYTY0NTBjNTBjNWUiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NzcxNTk1NTN9.e1y3sV3JcszwE2NtEOr7uxRhIJ3l02Oe14IIBL4uqBc" }
+    }
+
     const response = await AXIOS.delete(
-      ApiRoutes.DelCourse.concat(`${data.courseId}`)
-    );
+      ApiRoutes.DelCourse.concat(data.courseId),
+      config
+        );
     if (response.status !== 200) {
+      window.location.reload()
       setOpenAlert(true)
       return (
         <div
@@ -54,25 +60,29 @@ const DeleteModal = ({ openModal, onClose, data }: IDeleteModal) => {
   };
 
   const onSubmit = () => {
-    console.log("onsubmit")
-    onClose()
+    onClose
     //for dont repeatly call and call it in useEffect
-    callDeleteFunction = true
+    setCallDeleteFunction(true)
   };
   useEffect(() => {
+    try{
     if(callDeleteFunction){
       deleteCourse()
-      callDeleteFunction = false
+      setCallDeleteFunction(false)
+      console.log(callDeleteFunction)
+    }}
+    catch(err){
+      alert(err)
     }
-  }, []);
+  }, [callDeleteFunction]);
   return (
     <div className={`${openModal ? "visible" : "invisible"}`}>
       <div
-        className="bg-[#00000030] fixed top-0 left-0 right-0 bottom-0 animate-showingup"
+        className="bg-[#0000000a] fixed top-0 left-0 right-0 bottom-0 animate-showingup"
         onClick={onClose}
       />
       <div
-        className={`animate-showingup fixed inset-0 flex justify-center items-center z-50 p-4 overflow-x-hidden overflow-y-auto h-auto`}
+        className="animate-showingup fixed inset-0 flex justify-center items-center z-50 p-4 overflow-x-hidden overflow-y-auto h-auto"
       >
         <div className="relative w-full h-full max-w-md md:h-auto">
           <div className=" bg-white rounded-lg shadow">
@@ -84,14 +94,14 @@ const DeleteModal = ({ openModal, onClose, data }: IDeleteModal) => {
               <AiOutlineClose  />
             </button>
             <div className="p-6 text-center">
-              <div className="flex justify-center items-center p-4">
+              <div className="inline-flex justify-center items-center p-4">
                 <RiErrorWarningLine size={60} />
               </div>
               <h3 className="mb-5 text-lg font-normal text-gray-500">
                 آیا مطمئن هستید می‌خواهید این کورس را حذف کنید؟
               </h3>
               <button
-                onSubmit={onSubmit}
+                onClick={onSubmit}
                 type="submit"
                 className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center ml-2"
               >
