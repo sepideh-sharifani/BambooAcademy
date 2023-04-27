@@ -1,0 +1,13 @@
+/*@tailwind base;*/
+/*@tailwind components;*/
+/*@tailwind utilities;*/
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+/*@import './base.css';*/
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Lalezar&family=Oxygen+Mono&display=swap');
+@import url('https://v1.fontapi.ir/css/Yekan');
+@import url('https://db.onlinewebfonts.com/c/11d10b36edd0c8920bc0eb311631908e?family=W_yekan');
+/* @import url('./src/pages/landing/assets/neonbrand-zFSo6bnZJTw-unsplash.png') */
