@@ -9,7 +9,7 @@ interface InfoBoxProps {
 function InfoBox({ children }: InfoBoxProps) {
   return (
     <article
-      className={`w-1/3 bg-black opacity-40 h-[45%] 
+      className={`w-1/3 bg-black bg-opacity-40 h-[45%] 
        m-[1px] text-black text-4xl flex flex-col justify-evenly items-center max-md:w-full `}
     >
       {children}
@@ -25,10 +25,10 @@ export default function GeneralInfo() {
     >
       <InfoBox>
         <FaDesktop color={"white"} fontSize={"3rem"} />
-        <h3 className="text-3xl text-white opacity-100 " dir="rtl">
+        <h3 className="text-3xl text-white " dir="rtl">
           {"219 دوره"}{" "}
         </h3>
-        <p className="mx-4 overflow-hidden text-xl text-center text-white opacity-100 text-ellipsis h-1/3 max-h-1/3">
+        <p className="mx-4 overflow-hidden text-xl text-center text-white text-ellipsis h-1/3 max-h-1/3">
           {
             ".تا کنون بیش از 200 دوره از دسته بندی های متفاوت در سایت ثبت شد و قابل دسترسی است"
           }
@@ -36,10 +36,10 @@ export default function GeneralInfo() {
       </InfoBox>
       <InfoBox>
         <FaUserTie color={"white"} fontSize={"3rem"} />
-        <h3 className="text-3xl text-white opacity-100 " dir="rtl">
+        <h3 className="text-3xl text-white " dir="rtl">
           {"34 استاد"}
         </h3>
-        <p className="mx-4 overflow-hidden text-xl text-center text-white opacity-100 text-ellipsis h-1/3 max-h-1/3">
+        <p className="mx-4 overflow-hidden text-xl text-center text-white text-ellipsis h-1/3 max-h-1/3">
           {
             "بیش از 30 استاد،ازبرترین اساتید ایران همراه ما هستند و دوره های خودشونو ثبتکرده‌اند"
           }
@@ -47,10 +47,10 @@ export default function GeneralInfo() {
       </InfoBox>
       <InfoBox>
         <FaGraduationCap color={"white"} fontSize={"3rem"} />
-        <h3 className="text-3xl text-white opacity-100 " dir="rtl">
+        <h3 className="text-3xl text-white " dir="rtl">
           {" 575 دانشجو"}
         </h3>
-        <p className="mx-4 overflow-hidden text-xl text-center text-white opacity-100 text-ellipsis h-1/3 max-h-1/3">
+        <p className="mx-4 overflow-hidden text-xl text-center text-white text-ellipsis h-1/3 max-h-1/3">
           {
             "تا کنون بیش از 500 نفر از آموزش های بامبو استفاده کرده‌اند و نظرات خودشونو ثبت کرده‌اند"
           }

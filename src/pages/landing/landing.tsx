@@ -4,18 +4,19 @@ import {
   RoadMap,
   News,
   Suggestions,
+  HeaderContentLandingRoute
 } from "./components";
-import Header from "../../components/header";
+
 export default function Landing() {
   return (
-    <div className={`w-full absolute contents`}>
-      <Header hideSearchBar={true} />
+    <div className={`w-full absolute contents`} dir='ltr'>
+        <HeaderContentLandingRoute/>
       <main>
-        <GeneralInfo></GeneralInfo>
-        <LandingCourses></LandingCourses>
-        <RoadMap></RoadMap>
-        <News></News>
-        <Suggestions></Suggestions>
+        <GeneralInfo />
+        <LandingCourses />
+        <RoadMap />
+        <News />
+        <Suggestions />
       </main>
     </div>
   );

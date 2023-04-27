@@ -1,5 +1,7 @@
-import Header from "../../components/header"
+import SingleCourseDetails from "./section/SingleCourseDetails";
 
-export default function CourseDetails(){
-    return <Header hideSearchBar={true}/>
+export default function CourseDetails() {
+    return (
+            <SingleCourseDetails/>
+    )
 }
